@@ -1,0 +1,97 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+p{
+    font-size: 15pt;
+    font-weight: bold;
+    text-align:center;
+
+}
+
+.error{
+    background: #ffa99d;
+    border: 2px solid #d32f2f;
+    padding: 2pt;
+    z-index: 2;
+}
+.warning{
+    background: #f8f2ac;
+    border: 2px solid #ffe433;
+    padding: 2pt;
+    z-index: 1;
+}
+
+.btn {
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.form-container {
+    max-width: 250px;
+    padding: 10px;
+    background-color: white;
+    margin: auto;
+    border: 2px solid #ebebeb;
+}
+
+.form-container label {
+    font-size: 15pt;
+    padding: 15px;
+
+}
+
+.form-container input[type=text], .form-container input[type=password] {
+    width: 200px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.form-container .submit_btn {
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.form-container .cancel {
+}
+
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
