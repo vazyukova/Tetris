@@ -3,8 +3,8 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Тетрис. Авторизация.</title>
-    <!--<link rel="stylesheet" href="../static/css/login.css"/>-->
-    <link th:href="@{/css/login.css}" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="../static/css/login_style.css"/>-->
+    <link th:href="@{/css/login_style.css}" rel="stylesheet" />
 </head>
 <body>
 <div class="login_form">
@@ -15,7 +15,7 @@
     <div class="warning" th:if="${param.logout}">
         <p>Вы вышли из профиля.<p>
     </div>
-        <form th:action="@{/registration}" method="post" class="form-container">
+        <form th:action="@{/login}" method="post" class="form-container">
             <p>«Тетрис»</br>Вход</p>
             <label for="username"> Логин: </label>
             <input type="text" name="username" id="username" placeholder="Логин"/>
@@ -24,9 +24,8 @@
             <input type="password" name="password" id="password" placeholder="Пароль"/>
 
             <input type="submit" value="Вход" class="submit_btn"/>
-            <button th:href="@{/registration}" class="btn">Регистрация</button>
+            <a th:href="@{/registration}" class="btn">Регистрация</a>
         </form>
-
 </div>
 </body>
 </html>
