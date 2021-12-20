@@ -5,6 +5,10 @@ const context = canvas.getContext('2d');
 const grid = 32;
 // массив с последовательностями фигур, на старте — пустой
 var tetrominoSequence = [];
+var nowDate = new Date();
+var time;
+
+var results = 0;
 
 // с помощью двумерного массива следим за тем, что находится в каждой клетке игрового поля
 // размер поля — 10 на 20, и несколько строк ещё находится за видимой областью
@@ -80,8 +84,6 @@ let rAF = null;
 let gameOver = false;
 
 
-// Функция возвращает случайное число в заданном диапазоне
-// https://stackoverflow.com/a/1527820/2124254
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -184,7 +186,7 @@ function placeTetromino() {
     for (let row = playfield.length - 1; row >= 0; ) {
         // если ряд заполнен
         if (playfield[row].every(cell => !!cell)) {
-
+            results += 10;
             // очищаем его и опускаем всё вниз на одну клетку
             for (let r = row; r >= 0; r--) {
                 for (let c = 0; c < playfield[r].length; c++) {
@@ -207,20 +209,26 @@ function showGameOver() {
     cancelAnimationFrame(rAF);
     // ставим флаг окончания
     gameOver = true;
-    // рисуем чёрный прямоугольник посередине поля
-    context.fillStyle = 'black';
-    context.globalAlpha = 0.75;
-    context.fillRect(0, canvas.height / 2 - 30, canvas.width, 60);
-    // пишем надпись белым моноширинным шрифтом по центру
-    context.globalAlpha = 1;
-    context.fillStyle = 'white';
-    context.font = '36px monospace';
-    context.textAlign = 'center';
-    context.textBaseline = 'middle';
-    context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
+    var endDate = new Date();
+    time = endDate.getTime() - nowDate.getTime();
+    $('.endGame').toggleClass('openEndGame');
+    $('.results').append(results);
+    $('.time').append(time);
 }
 
-
+$('.saveButton').on('click', function (event) {
+    event.preventDefault();
+    $.ajax({
+        type: 'POST',
+        contentType: "application/json",
+        url: '/api/saveResults',
+        data: JSON.stringify({"result": results, "time": time}),
+        success: function(data) { console.log(data); }, // обработка ответа от сервера
+        error: function(jqXHR) { console.log('Ошибка выполнения'); },
+        complete: function() { console.log('Завершение выполнения'); }
+    });
+    document.location.href = '/statistic'
+})
 
 // главный цикл игры
 function loop() {

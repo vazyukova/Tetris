@@ -1,8 +1,8 @@
-package com.pi.tetris.tetris.controller;
+package com.pi.tetris.controller;
 
-import com.pi.tetris.tetris.model.Role;
-import com.pi.tetris.tetris.model.Usr;
-import com.pi.tetris.tetris.service.UserService;
+import com.pi.tetris.model.Role;
+import com.pi.tetris.model.Usr;
+import com.pi.tetris.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

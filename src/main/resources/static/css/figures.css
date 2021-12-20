@@ -1,0 +1,10 @@
+.figure{
+
+}
+td{
+    border: 1px black solid;
+    width: 20px;
+    heigth: 20px;
+    margin: 0;
+    font-size: 14px;
+}

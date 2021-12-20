@@ -1,0 +1,24 @@
+.menu-wrapper {
+    width: 250px;
+    height: 210px;
+    margin: 110px auto 0;
+    border: 1px solid lightgrey;
+    padding: 10px;
+}
+
+.menu-wrapper a{
+    text-decoration: none;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    color: black;
+    padding: 16px 20px;
+    cursor: pointer;
+    width: 200px;
+    border: 2px solid #ebebeb;
+}
+
+.menu-items{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+}

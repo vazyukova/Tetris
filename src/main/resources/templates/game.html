@@ -6,8 +6,21 @@
   <link th:href="@{/css/game.css}" rel="stylesheet" />
 </head>
 <body>
-Игра
+
   <canvas width="320" height="640" id="game"></canvas>
+  <div class="endGame">
+    <p>Игра окончена!</p>
+    <p>Сохранить результаты?</p>
+    <p class="results"></p>
+    <p class="time"></p>
+      <input id="user" hidden th:value="${username}">
+      <a th:href="@{/statistic}">
+        <div class="saveButton">Да</div>
+      </a>
+    <a th:href="@{/main}">Нет</a>
+  </div>
+  <script type="text/javascript"
+          src="webjars/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript" th:src="@{/js/game.js}"></script>
 </body>
 </html>

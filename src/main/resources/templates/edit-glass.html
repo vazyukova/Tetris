@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Стаканы</title>
+</head>
+<body>
+<a th:href="@{/main}"><div class="menu-item">Вернуться на главную страницу</div></a>
+<div class="edit-modal" style="background-color: white" th:if="${editG}">
+    <form th:action="@{/editGlass/{id}(id=${editG.getId()})}" method="post" th:class="form-container">
+        <input type="number" name="id" id="id" th:value="${editG.getId()}" hidden>
+        <label for="height"> Высота: </label>
+        <input type="number" name="height" id="height" th:value="${editG.getHeight()}" placeholder="Высота"/>
+
+        <label for="width"> Ширина:</label>
+        <input type="number" name="width" id="width" th:value="${editG.getWidth()}" placeholder="Ширина"/>
+
+        <input type="submit" value="Сохранить" th:class="submit_btn"/>
+    </form>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Номер</th>
+        <th>Высота</th>
+        <th>Ширина</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="glass : ${glasses}">
+        <td th:text="${glass.getId()}"></td>
+        <td th:text="${glass.getHeight()}"></td>
+        <td th:text="${glass.getWidth()}"></td>
+        <td class="edit"><a th:href="@{/editGlass/{id}(id=${glass.getId()})}">Редактировать</a></td>
+        <td class="delete"><a th:href="@{/deleteGlass/{id}(id=${glass.getId()})}">Удалить</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

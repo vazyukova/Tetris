@@ -14,3 +14,14 @@ body {
 canvas {
     border: 1px solid black;
 }
+
+.endGame {
+    display: none;
+}
+
+.openEndGame {
+    position: absolute;
+    display: block;
+    background-color: white;
+    border: 1px black solid;
+}

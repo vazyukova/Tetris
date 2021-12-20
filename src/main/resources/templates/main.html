@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Hello World!</title>
+    <title>Main Page</title>
+
+    <link media="all" th:href="@{/css/main.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
-<h1 th:inline="text">Hello user!</h1>
-<a th:href="@{/game}">Main Page</a>
+<div class="menu-wrapper">
+    <h1 th:inline="text">Игра "Тетрис"</h1>
+    <div class="menu-items">
+        <a th:href="@{/game}"><div class="menu-item">Играть</div></a>
+        <a th:href="@{/statistic}"><div class="menu-item">Статистика</div></a>
+        <a th:href="@{/glasses}"><div class="menu-item">Стаканы</div></a>
+        <a th:href="@{/figures}"><div class="menu-item">Фигуры</div></a>
+        <a th:href="@{/level/1}"><div class="menu-item">Уровни сложности</div></a>
+        <!--<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/statistic}" ><div class="menu-item">Настройки уровня сложности</div></a>-->
+    </div>
+</div>
+<div class="modal-level" hidden>
+    <a th:href="@{/level/1}">Легкий</a>
+    <a th:href="@{/level/2}">Средний</a>
+    <a th:href="@{/level/3}">Сложный</a>
+</div>
+<div class="modal-game" hidden>
+    <a th:href="@{/game/1}">Легкий</a>
+    <a th:href="@{/game/2}">Средний</a>
+    <a th:href="@{/game/3}">Сложный</a>
+</div>
 </body>
 </html>

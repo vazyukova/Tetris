@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Статистика</title>
+</head>
+<body>
+    <a th:href="@{/main}"><div class="menu-item">Вернуться на главную страницу</div></a>
+    <table>
+        <thead>
+        <tr>
+            <th>Пользователь</th>
+            <th>Очки</th>
+            <th>Время</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="st : ${statistics}">
+            <th th:text="${st.getUser().getUsername()}"></th>
+            <th th:text="${st.getResult()}"></th>
+            <th th:text="${st.getTime()}"></th>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

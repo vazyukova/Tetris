@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Стаканы в уровне</title>
+</head>
+<body>
+<input hidden id="levelId" th:value="${levelId}">
+<input hidden id="glassId" th:value="${glassId}">
+<table>
+    <thead>
+    <tr>
+        <th>Номер</th>
+        <th>Высота</th>
+        <th>Ширина</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="glass : ${glasses}">
+        <td class="idG" th:text="${glass.getId()}"></td>
+        <td class="height" th:text="${glass.getHeight()}"></td>
+        <td class="width" th:text="${glass.getWidth()}"></td>
+        <td class="add" th:id="${glass.getId()}">Добавить</td>
+    </tr>
+    </tbody>
+</table>
+<button class="saveButton">Сохранить</button>
+<script type="text/javascript"
+        src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" th:src="@{/js/glass-in-level.js}"></script>
+</body>
+</html>

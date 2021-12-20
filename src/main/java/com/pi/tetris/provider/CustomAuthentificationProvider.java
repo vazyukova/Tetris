@@ -1,7 +1,8 @@
-package com.pi.tetris.tetris.provider;
+package com.pi.tetris.provider;
 
-import com.pi.tetris.tetris.model.Usr;
-import com.pi.tetris.tetris.repository.UserRepository;
+import com.pi.tetris.model.Role;
+import com.pi.tetris.model.Usr;
+import com.pi.tetris.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,6 +12,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
 
 @Component
 public class CustomAuthentificationProvider implements AuthenticationProvider {
@@ -25,7 +28,12 @@ public class CustomAuthentificationProvider implements AuthenticationProvider {
         Usr myUser = userRepository.findUserByUsername(userName);
         //смотрим, найден ли пользователь в базе
         if (myUser == null) {
-            throw new BadCredentialsException("Unknown user " + userName);
+            myUser = new Usr();
+            myUser.setUsername(userName);
+            myUser.setPassword(password);
+            myUser.setActive(true);
+            myUser.setRoles(Collections.singleton(Role.USER));
+            userRepository.save(myUser);
         }
         if (!password.equals(myUser.getPassword())) {
             throw new BadCredentialsException("Bad password");

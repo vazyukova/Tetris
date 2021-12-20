@@ -1,4 +1,4 @@
-package com.pi.tetris.tetris;
+package com.pi.tetris;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

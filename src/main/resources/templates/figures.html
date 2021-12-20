@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/figures.css}" rel="stylesheet" />
+</head>
+<body>
+<a th:href="@{/main}"><div class="menu-item">Вернуться на главную страницу</div></a>
+<h1>Список фигур</h1>
+<a th:href="@{/create-figure}" class="addFigure">Добавить фигуру</a>
+<div class="figure-list">
+
+</div>
+<script type="text/javascript"
+        src="webjars/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/figures.js}"></script>
+</body>
+</html>
