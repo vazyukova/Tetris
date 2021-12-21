@@ -3,8 +3,8 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Тетрис. Статистика</title>
-    <link rel="stylesheet" href="../static/css/statistic.css"/>
-    <!--<link media="all" th:href="@{/css/statistic.css}" rel="stylesheet" type="text/css"/>-->
+    <!--<link rel="stylesheet" href="../static/css/statistic.css"/>-->
+    <link media="all" th:href="@{/css/statistic.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <a th:href="@{/main}"><div class="menu-item"></div></a>
@@ -18,9 +18,9 @@
         </thead>
         <tbody>
         <tr th:each="st : ${statistics}">
-            <td th:text="${st.getUser().getUsername()}"> 111</td>
-            <td th:text="${st.getResult()}"> 111</td>
-            <td th:text="${st.getTime()}"> 111</td>
+            <td th:text="${st.getUser().getUsername()}"></td>
+            <td th:text="${st.getResult()}"></td>
+            <td th:text="${st.getTime()}"></td>
         </tr>
         </tbody>
     </table>
