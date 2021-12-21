@@ -1,26 +1,98 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-size: 15px;
+}
 .menu-wrapper {
     width: 250px;
-    height: 210px;
+    height: auto;
     margin: 110px auto 0;
-    border: 1px solid lightgrey;
+    border: 2px solid lightgrey;
     padding: 10px;
 }
 
 .menu-wrapper a{
     text-decoration: none;
-    margin: 0 auto;
-    margin-bottom: 15px;
+    margin: 0 auto 15px;
     color: black;
     padding: 16px 20px;
     cursor: pointer;
     width: 200px;
-    border: 2px solid #ebebeb;
+    border: 2px solid lightgrey;
+    background: #f3f3f3;
+    text-align:center;
+}
+.menu-wrapper a:active{
+    background: #c9f3f1;
+}
+
+.menu-wrapper h1{
+    text-align:center;
 }
 
 .menu-items{
     display: flex;
     flex-direction: column;
     padding-bottom: 30px;
+}
+.menu-item{
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.logout_btn{
+    color: black;
+    padding: 16px 20px;
+    margin-top: 10pt;
+    cursor: pointer;
+    width: 200px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border: 2px solid lightgrey;
+}
+
+.logout_btn:active{
+    background: #c9f3f1;
+}
+
+.about{
+    position: relative;
+}
+
+.menu-wrapper .aboutDev_btn, .menu-wrapper .aboutSyst_btn{
+    color: black;
+    padding: 5px;
+    border: none;
+    background: white;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.menu-wrapper .aboutDev_btn{
+    position: absolute;
+    top:2px;
+    right:60px;
+    background-image: url("https://img.icons8.com/ios/30/000000/info--v1.png");
+    background-repeat: no-repeat;
+}
+
+.menu-wrapper .aboutSyst_btn{
+    position: absolute;
+    top:2px;
+    right:10px;
+    background-image: url("https://img.icons8.com/ios/30/000000/help.png");
+    background-repeat: no-repeat;
 }
 
 .overlay {
@@ -62,7 +134,29 @@
     fill: #444;
     cursor: pointer;
 }
+
 .active{
     opacity: 1;
     visibility: visible;
+}
+
+.modal a{
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.modal .modal-item{
+    text-decoration: none;
+    margin: 0 auto 15px;
+    color: black;
+    padding: 15px 20px;
+    cursor: pointer;
+    width: 200px;
+    border: 2px solid lightgrey;
+    background: #f3f3f3;
+    text-align:center;
+}
+.modal .modal-item:active{
+    background: #c9f3f1;
 }
