@@ -31,11 +31,11 @@ public class GlassesController {
         return "glasses";
     }
 
-    @PostMapping("/saveGlass")
+    /*@PostMapping("/saveGlass")
     public String saveGlass(Glass glass){
         glassService.save(glass);
         return "redirect:/glasses";
-    }
+    }*/
 
     @GetMapping("/deleteGlass/{id}")
     public String deleteGlass(@PathVariable(name = "id") int id){

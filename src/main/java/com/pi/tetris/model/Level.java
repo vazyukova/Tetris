@@ -17,5 +17,5 @@ public class Level {
     Glass glass;
 
     @Column(name="speed")
-    int speed;
+    double speed;
 }

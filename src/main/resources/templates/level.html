@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Уровень сложности</title>
+    <style>
+        td{
+            border: 1px black solid;
+            width: 20px;
+            heigth: 20px;
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
+    <input hidden id="levelId" th:value="${level.getId()}">
     <a th:href="@{/main}"><div class="menu-item">Вернуться на главную страницу</div></a>
-    <h1>Список фигур</h1>
-    <a th:href="@{/figs-in-level/1}" class="addFigure">Изменить набор фигур</a>
+    <h1 id="pageName"></h1>
+    <h2>Список фигур</h2>
+    <a th:href="@{/figs-in-level/{id}(id=${level.getId()})}" class="addFigure">Изменить набор фигур</a>
     <div class="figure-list">
     </div>
-    <h1>Список стаканов</h1>
-    <a th:href="@{/glass-in-level/1}" class="addFigure">Изменить стакан</a>
+    <h2>Список стаканов</h2>
+    <a th:href="@{/glass-in-level/{id}(id=${level.getId()})}" class="addFigure">Изменить стакан</a>
     <br>
     <label>Id</label>
     <label th:text="${glass.getId()}"></label>
@@ -22,8 +33,10 @@
     <label>Ширина</label>
     <label th:text="${glass.getWidth()}"></label>
         <br>
-    <h1>Скорость падения фигур</h1>
-    <input type="range" min="0.5" max="2" step="0.5" th:value="${level.speed}">
+    <h2>Скорость падения фигур</h2>
+    <input class="speed" type="range" min="0.5" max="2" step="0.5" th:value="${level.speed}">
+    <br>
+    <button class="saveLevel">Сохранить настройки уровня</button>
     <script type="text/javascript"
             src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script type="text/javascript" th:src="@{/js/level.js}"></script>

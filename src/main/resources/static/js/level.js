@@ -1,7 +1,17 @@
+var levelId = $('#levelId').val();
+if (levelId == 1){
+    $('#pageName').text("Легкий уровень");
+}
+else if (levelId == 2){
+    $('#pageName').text("Средний уровень");
+}
+else {
+    $('#pageName').text("Сложный уровень");
+}
 $.ajax({
     type: 'GET',
     contentType: "application/json",
-    url: '/api/figures/1',
+    url: '/api/figures/' + levelId,
     success: function(data) {
         console.log(data);
         data.forEach(function (fig){
@@ -33,6 +43,18 @@ $.ajax({
     }, // обработка ответа от сервера
     error: function(jqXHR) { console.log('Ошибка выполнения'); },
     complete: function() { console.log('Завершение выполнения'); }
+});
+
+$('.saveLevel').on('click', function (){
+    $.ajax({
+        type: 'POST',
+        contentType: "application/json",
+        url: '/api/saveLevel/' + levelId,
+        data: JSON.stringify($('.speed').val()),
+        success: function (){
+            location.reload();
+        }
+    })
 });
 
 function getMatrixFromStr(str){

@@ -1,7 +1,23 @@
-$('.add').on('click', function (e) {
-    $('.add-modal').css('display', 'block');
-})
+console.log("Загрузился");
+$("#saveButton").on("click", function(){
+    let heightValue = $('#height').val();
+    let widthValue = $('#width').val();
+    console.log("высота " + heightValue + " ширина" + widthValue);
+    if (heightValue < 15 || heightValue > 49 || widthValue < 7 || widthValue > 25){
+        alert("Ширина стакана должна быть от 8 до 24 \n" +
+            "Высота стакана должна быть от 16 до 48");
+    }
+    else {
+        $.ajax({
+            url: 'api/saveGlass',
+            method: 'POST',
+            dataType: 'application/json',
+            contentType: 'application/json',
+            data: JSON.stringify({'height': heightValue, 'width': widthValue}),
+            success: function (data) {
 
-$('.edit').on('click', function (e) {
-    $('.edit-modal').css('display', 'block');
-})
+            }
+        });
+        location.reload();
+    }
+});

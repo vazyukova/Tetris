@@ -8,16 +8,14 @@
 <body>
 <a th:href="@{/main}"><div class="menu-item">Вернуться на главную страницу</div></a>
     <button class="add">Добавить новый стакан</button>
-    <div class="add-modal" style="background-color: white;"th:if="!${editG}">
-        <form th:action="@{/saveGlass}" method="post" th:class="form-container">
+    <div class="add-modal" style="background-color: white;">
             <label for="height"> Высота: </label>
-            <input type="number" name="height" placeholder="Высота"/>
+            <input type="number" id="height" placeholder="Высота">
 
             <label for="width"> Ширина:</label>
-            <input type="number" name="width" placeholder="Ширина"/>
+            <input type="number" id="width" placeholder="Ширина">
 
-            <input type="submit" value="Сохранить" th:class="submit_btn"/>
-        </form>
+            <input type="submit" value="Сохранить" id="saveButton">
     </div>
     <table>
         <thead>
@@ -38,7 +36,7 @@
         </tbody>
     </table>
     <script type="text/javascript"
-            src="webjars/jquery/2.2.4/jquery.min.js"></script>
+            src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script type="text/javascript" th:src="@{/js/glasses.js}"></script>
 </body>
 </html>

@@ -105,7 +105,7 @@ public class REST {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usr usr = userService.findByUsername(user.getUsername());
         statistic.setUser(usr);
-        statistic.setTime(Integer.parseInt(statistic.getTime()) / 60000 + ":" + Integer.parseInt(statistic.getTime()) % 60000);
+        statistic.setTime(Integer.parseInt(statistic.getTime()) / 60000 + ":" + (Integer.parseInt(statistic.getTime()) % 60000) / 1000);
         Statistic saveStatistic = statisticService.save(statistic);
         if (saveStatistic == null) {
             return ResponseEntity.notFound().build();
@@ -116,6 +116,38 @@ public class REST {
 
             return ResponseEntity.created(uri)
                     .body(saveStatistic);
+        }
+    }
+
+    @PostMapping(value = "/saveLevel/{id}", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Level> saveLevel(@PathVariable(name="id") int id, @RequestBody double speed) {
+        Level level = levelService.getById(id).get();
+        level.setSpeed(speed);
+        Level savedLevel = levelService.save(level);
+        if (savedLevel == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .buildAndExpand(savedLevel.getId())
+                    .toUri();
+
+            return ResponseEntity.created(uri)
+                    .body(savedLevel);
+        }
+    }
+
+    @PostMapping(value = "/saveGlass", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Glass> saveGlass(@RequestBody Glass glass) {
+        Glass savedGlass = glassService.save(glass);
+        if (savedGlass == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .buildAndExpand(savedGlass.getId())
+                    .toUri();
+
+            return ResponseEntity.created(uri)
+                    .body(savedGlass);
         }
     }
 }

@@ -1,35 +1,44 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-    <title>Main Page</title>
-
-    <link media="all" th:href="@{/css/main.css}" rel="stylesheet" type="text/css"/>
-</head>
-<body>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
-<div class="menu-wrapper">
-    <h1 th:inline="text">Игра "Тетрис"</h1>
-    <div class="menu-items">
-        <a th:href="@{/game}"><div class="menu-item">Играть</div></a>
-        <a th:href="@{/statistic}"><div class="menu-item">Статистика</div></a>
-        <a th:href="@{/glasses}"><div class="menu-item">Стаканы</div></a>
-        <a th:href="@{/figures}"><div class="menu-item">Фигуры</div></a>
-        <a th:href="@{/level/1}"><div class="menu-item">Уровни сложности</div></a>
-        <!--<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/statistic}" ><div class="menu-item">Настройки уровня сложности</div></a>-->
-    </div>
-</div>
-<div class="modal-level" hidden>
-    <a th:href="@{/level/1}">Легкий</a>
-    <a th:href="@{/level/2}">Средний</a>
-    <a th:href="@{/level/3}">Сложный</a>
-</div>
-<div class="modal-game" hidden>
-    <a th:href="@{/game/1}">Легкий</a>
-    <a th:href="@{/game/2}">Средний</a>
-    <a th:href="@{/game/3}">Сложный</a>
-</div>
-</body>
+    <head>
+        <title>Main Page</title>
+        <link media="all" th:href="@{/css/main.css}" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+        <div class="menu-wrapper">
+            <h1 th:inline="text">Игра "Тетрис"</h1>
+            <div class="menu-items">
+                <a id="game-button" href=#><div class="menu-item">Играть</div></a>
+                <a th:href="@{/statistic}"><div class="menu-item">Статистика</div></a>
+                <a th:href="@{/glasses}"><div class="menu-item">Стаканы</div></a>
+                <a th:href="@{/figures}"><div class="menu-item">Фигуры</div></a>
+                <a id="level-button" href=#><div class="menu-item">Уровни сложности</div></a>
+                <!--<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/statistic}" ><div class="menu-item">Настройки уровня сложности</div></a>-->
+            </div>
+        </div>
+        <div id="level" class="modal">
+            <svg class="modal_cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>
+            <a th:href="@{/level/1}">Легкий</a>
+            <br>
+            <a th:href="@{/level/2}">Средний</a>
+            <br>
+            <a th:href="@{/level/3}">Сложный</a>
+        </div>
+        <div id="game" class="modal">
+            <svg class="modal_cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>
+            <a th:href="@{/game/1}">Легкий</a>
+            <br>
+            <a th:href="@{/game/2}">Средний</a>
+            <br>
+            <a th:href="@{/game/3}">Сложный</a>
+        </div>
+        <div class="overlay" id="overlay-modal"></div>
+        <script type="text/javascript"
+                src="https://code.jquery.com/jquery-1.11.1.js"></script>
+        <script type="text/javascript" th:src="@{/js/main.js}"></script>
+    </body>
 </html>

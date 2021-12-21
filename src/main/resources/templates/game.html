@@ -6,21 +6,28 @@
   <link th:href="@{/css/game.css}" rel="stylesheet" />
 </head>
 <body>
-
-  <canvas width="320" height="640" id="game"></canvas>
-  <div class="endGame">
+  <input hidden id="levelId" th:value="${level.getId()}">
+  <input hidden id="height" th:value="${level.getGlass().getHeight()}">
+  <input hidden id="width" th:value="${level.getGlass().getWidth()}">
+  <canvas id="game"></canvas>
+  <div class="modal">
     <p>Игра окончена!</p>
     <p>Сохранить результаты?</p>
+    <label><b>Очки</b></label>
     <p class="results"></p>
+    <label><b>Время</b></label>
     <p class="time"></p>
       <input id="user" hidden th:value="${username}">
-      <a th:href="@{/statistic}">
-        <div class="saveButton">Да</div>
-      </a>
-    <a th:href="@{/main}">Нет</a>
+      <div style="display:flex">
+        <a th:href="@{/statistic}">
+          <div class="saveButton">Да</div>
+        </a>
+        <a th:href="@{/main}">Нет</a>
+      </div>
   </div>
+  <div class="overlay" id="overlay-modal"></div>
   <script type="text/javascript"
-          src="webjars/jquery/2.2.4/jquery.min.js"></script>
+          src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script type="text/javascript" th:src="@{/js/game.js}"></script>
 </body>
 </html>

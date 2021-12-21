@@ -1,6 +1,7 @@
 // получаем доступ к холсту
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
+
 // размер квадратика
 const grid = 32;
 // массив с последовательностями фигур, на старте — пустой
@@ -11,21 +12,38 @@ var time;
 var results = 0;
 
 // с помощью двумерного массива следим за тем, что находится в каждой клетке игрового поля
-// размер поля — 10 на 20, и несколько строк ещё находится за видимой областью
+// размер поля, и несколько строк ещё находится за видимой областью
 var playfield = [];
-
+var height = $('#height').val();
+var width = $('#width').val();
+$('#game').attr('height', 32 * height);
+$('#game').attr('width', 32 * width);
 // заполняем сразу массив пустыми ячейками
-for (let row = -2; row < 20; row++) {
+for (let row = -2; row < height; row++) {
     playfield[row] = [];
 
-    for (let col = 0; col < 10; col++) {
+    for (let col = 0; col < width; col++) {
         playfield[row][col] = 0;
     }
 }
 
+for (var x = grid; x < grid * width; x += 32) {
+    context.moveTo(x, 0);
+    context.lineTo(x, grid * width);
+    context.strokeStyle = "#888";
+    context.stroke();
+}
+
+for (var y = grid; y < grid * height; y += 32) {
+    context.moveTo(0, y);
+    context.lineTo(grid * height, y);
+    context.strokeStyle = "#888";
+    context.stroke();
+}
+
 // как рисовать каждую фигуру
 // https://tetris.fandom.com/wiki/SRS
-const tetrominos = {
+let tetrominos = {
     'I': [
         [0,0,0,0],
         [1,1,1,1],
@@ -211,9 +229,9 @@ function showGameOver() {
     gameOver = true;
     var endDate = new Date();
     time = endDate.getTime() - nowDate.getTime();
-    $('.endGame').toggleClass('openEndGame');
+    $('.modal').addClass('active');
     $('.results').append(results);
-    $('.time').append(time);
+    $('.time').append(Math.floor(time / 60000) + ":" + Math.floor((time % 60000) / 1000));
 }
 
 $('.saveButton').on('click', function (event) {
@@ -238,8 +256,8 @@ function loop() {
     context.clearRect(0,0,canvas.width,canvas.height);
 
     // рисуем игровое поле с учётом заполненных фигур
-    for (let row = 0; row < 20; row++) {
-        for (let col = 0; col < 10; col++) {
+    for (let row = 0; row < height; row++) {
+        for (let col = 0; col < width; col++) {
             if (playfield[row][col]) {
                 const name = playfield[row][col];
                 context.fillStyle = colors[name];
