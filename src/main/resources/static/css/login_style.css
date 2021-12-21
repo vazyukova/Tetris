@@ -74,9 +74,6 @@ p{
     outline: none;
 }
 
-.form-container input[type=text]:active, .form-container input[type=password]:active {
-    background: #c9f3f1;
-}
 
 .form-container .submit_btn {
     color: black;
