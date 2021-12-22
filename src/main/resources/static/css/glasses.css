@@ -53,11 +53,24 @@
     background-repeat: no-repeat;
 }
 
-.add-modal {
+.overlay {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 20;
+    transition: .3s all;
+}
+
+.modal {
     opacity: 0;
     visibility: hidden;
     width: 100%;
-    max-width: 500px;
+    max-width: 300px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -70,45 +83,69 @@
     background-color: #fff;
     transition: 0.3s all;
 }
-
-.add-modal label {
-    font-size: 15pt;
-    padding: 15px;
-
+.modal_cross {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    fill: #444;
+    cursor: pointer;
+}
+.active{
+    opacity: 1;
+    visibility: visible;
 }
 
-.add-modal input[type=number]{
-    width: 200px;
+.modal label {
+    font-size: 15pt;
+    position: fixed;
+    left: 20%;
+    transform: translate(-50%, 0);
+    margin: 0 auto 15px;
+    color: black;
+    padding: 15px 20px;
+}
+
+.modal input[type=number]{
+    width: 100px;
     padding: 15px;
-    margin: 5px 0 22px 0;
+    margin-left: 60px;
     border: none;
     background: #f1f1f1;
-    position: relative;
-    left: 50%;
+    position: fixed;
+    left: 40%;
     transform: translate(-50%, 0);
 }
+.modal .in_width, .modal .l_width{
+    margin-top: 50px;
+}
 
-.add-modal input[type=number]:focus{
+.modal .in_height, .modal .l_height{
+    margin-top: 20px;
+}
+
+.modal input[type=number]:focus{
     background-color: #ddd;
     outline: none;
 }
 
-.add-modal input[type=submit] {
+.modal input[type=submit] {
     color: black;
-    padding: 16px 20px;
-    border: none;
+    padding: 15px 20px;
     cursor: pointer;
     width: 200px;
+    margin-top: 90px;
     margin-bottom: 10px;
     opacity: 0.8;
     font-size: 15px;
     font-weight: bold;
     position: relative;
-    left: 50%;
+    left: 35%;
     transform: translate(-50%, 0);
     border: 2px solid lightgrey;
 }
 
-.add-modal input[type=submit]:active{
+.modal input[type=submit]:active{
     background: #c9f3f1;
 }
