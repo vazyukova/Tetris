@@ -34,8 +34,8 @@
             <td th:text="${glass.getId()}"></td>
             <td th:text="${glass.getHeight()}"></td>
             <td th:text="${glass.getWidth()}"></td>
-            <td class="edit"><a th:href="@{/editGlass/{id}(id=${glass.getId()})}"></a></td>
-            <td class="delete"><a th:href="@{/deleteGlass/{id}(id=${glass.getId()})}"></a></td>
+            <td class="td-button"><a th:href="@{/editGlass/{id}(id=${glass.getId()})}"><div class="edit"></div></a></td>
+            <td class="td-button"><a th:href="@{/deleteGlass/{id}(id=${glass.getId()})}"><div class="delete"></div></a></td>
         </tr>
         </tbody>
     </table>

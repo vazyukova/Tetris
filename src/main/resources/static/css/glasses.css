@@ -33,16 +33,19 @@
     text-align: center;
 }
 
-.table .edit, .table .delete{
-    height: 30px;
-    width: 30px;
+.edit, .delete{
+    height: 42px;
+    width: 37px;
+}
+.td-button{
+    width: 37px;
 }
 
-.table .delete{
+.delete{
     background-image: url("https://img.icons8.com/ios/40/000000/trash--v1.png");
     background-repeat: no-repeat;
 }
-.table .edit{
+.edit{
     background-image: url("https://img.icons8.com/material-outlined/40/000000/edit--v2.png");
     background-repeat: no-repeat;
 }
