@@ -1,0 +1,114 @@
+.add{
+    text-decoration: none;
+    margin: 0 auto 15px 100px;
+    color: black;
+    padding: 15px 20px;
+    cursor: pointer;
+    width: 200px;
+    border: 2px solid lightgrey;
+    background: #f3f3f3;
+    text-align:center;
+}
+
+
+.table {
+    width: 90%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border: 15px solid #F2F8F8;
+    border-top: 5px solid #F2F8F8;
+    border-collapse: collapse;
+}
+.table th {
+    font-weight: bold;
+    padding: 5px;
+    background: #F2F8F8;
+    border: 5px solid #F2F8F8;
+    text-align: center;
+}
+.table td {
+    padding: 5px;
+    border: 5px solid #F2F8F8;
+    text-align: center;
+}
+
+.table .edit, .table .delete{
+    height: 30px;
+    width: 30px;
+}
+
+.table .delete{
+    background-image: url("https://img.icons8.com/ios/40/000000/trash--v1.png");
+    background-repeat: no-repeat;
+}
+.table .edit{
+    background-image: url("https://img.icons8.com/material-outlined/40/000000/edit--v2.png");
+    background-repeat: no-repeat;
+}
+.menu-item{
+    width: 30px;
+    height: 30px;
+    background-image: url("https://img.icons8.com/ios/30/000000/home-page.png");
+    background-repeat: no-repeat;
+}
+
+.add-modal {
+    opacity: 0;
+    visibility: hidden;
+    width: 100%;
+    max-width: 500px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    box-shadow: 0 3px 10px -.5px rgba(0, 0, 0, .2);
+    text-align: center;
+    padding: 30px;
+    border-radius: 3px;
+    background-color: #fff;
+    transition: 0.3s all;
+}
+
+.add-modal label {
+    font-size: 15pt;
+    padding: 15px;
+
+}
+
+.add-modal input[type=number]{
+    width: 200px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.add-modal input[type=number]:focus{
+    background-color: #ddd;
+    outline: none;
+}
+
+.add-modal input[type=submit] {
+    color: black;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border: 2px solid lightgrey;
+}
+
+.add-modal input[type=submit]:active{
+    background: #c9f3f1;
+}

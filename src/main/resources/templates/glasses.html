@@ -49,9 +49,12 @@
             visibility: visible;
         }
     </style>
+    <title>Тетрис. Стаканы</title>
+    <!--<link rel="stylesheet" href="../static/css/glasses.css"/>-->
+    <link media="all" th:href="@{/css/glasses.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<a th:href="@{/main}"><div class="menu-item">Вернуться на главную страницу</div></a>
+<a th:href="@{/main}"><div class="menu-item"></div></a>
     <button class="add">Добавить новый стакан</button>
     <div class="modal" style="background-color: white;">
         <svg class="modal_cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>
@@ -64,7 +67,7 @@
             <input type="submit" value="Сохранить" id="saveButton">
     </div>
     <div class="overlay" id="overlay-modal"></div>
-    <table>
+    <table class="table">
         <thead>
         <tr>
             <th>Номер</th>
@@ -77,8 +80,8 @@
             <td th:text="${glass.getId()}"></td>
             <td th:text="${glass.getHeight()}"></td>
             <td th:text="${glass.getWidth()}"></td>
-            <td class="edit"><a th:href="@{/editGlass/{id}(id=${glass.getId()})}">Редактировать</a></td>
-            <td class="delete"><a th:href="@{/deleteGlass/{id}(id=${glass.getId()})}">Удалить</a></td>
+            <td class="edit"><a th:href="@{/editGlass/{id}(id=${glass.getId()})}"></a></td>
+            <td class="delete"><a th:href="@{/deleteGlass/{id}(id=${glass.getId()})}"></a></td>
         </tr>
         </tbody>
     </table>

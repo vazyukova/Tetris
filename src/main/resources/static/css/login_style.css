@@ -49,7 +49,7 @@ p{
     padding: 10px;
     background-color: white;
     margin: auto;
-    border: 2px solid #ebebeb;
+    border: 2px solid lightgrey;
 }
 
 .form-container label {
@@ -74,6 +74,7 @@ p{
     outline: none;
 }
 
+
 .form-container .submit_btn {
     color: black;
     padding: 16px 20px;
@@ -87,6 +88,11 @@ p{
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
+    border: 2px solid lightgrey;
+}
+
+.form-container .submit_btn:active{
+    background: #c9f3f1;
 }
 
 .form-container .cancel {
