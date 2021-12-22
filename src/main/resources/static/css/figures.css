@@ -8,3 +8,52 @@ td{
     margin: 0;
     font-size: 14px;
 }
+
+.menu-item{
+    width: 30px;
+    height: 30px;
+    background-image: url("https://img.icons8.com/ios/30/000000/home-page.png");
+    background-repeat: no-repeat;
+}
+
+.addFigure{
+    text-decoration: none;
+    margin: 0 auto 15px 100px;
+    color: black;
+    padding: 15px 20px;
+    cursor: pointer;
+    width: 200px;
+    border: 2px solid lightgrey;
+    background: #f3f3f3;
+    text-align:center;
+}
+.addFigure:active{
+    background: #c9f3f1;
+}
+
+h1{
+    font-size: 20pt;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+}
+
+.figure-list{
+    margin-top: 60pt;
+    width: 80%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+td{
+    border: 2px solid #254141;
+    border-collapse: collapse;
+}
+.figure-list .deleteLink{
+    height: 30px;
+    width: 30px;
+    border: none;
+    background: white url("https://img.icons8.com/ios/30/000000/trash--v1.png") no-repeat;
+}

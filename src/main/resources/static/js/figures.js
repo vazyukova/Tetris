@@ -5,9 +5,8 @@ $.ajax({
     success: function(data) {
         console.log(data);
         data.forEach(function (fig){
-            $('.figure-list').append('<div class="figure-div-'+ fig.id + '"></div>');
-            $('.figure-div-' + fig.id).append('<button class="deleteLink" id="' + fig.id + '">Удалить</button>');//figures-api/deleteFigure/' + fig.id + '">Удалить</p>')
-            $('.figure-div-' + fig.id).append('<table class="figure' + fig.id + '"></table>');
+            $('.figure-list').append('<div class="figure-div-'+ fig.id + '" style="display: inline-block; border: 2px solid #254141; margin: 10pt"></div>');
+            $('.figure-div-' + fig.id).append('<table class="figure' + fig.id + '" ></table>');
             var matrix = getMatrixFromStr(fig.matrix);
             for (var i = 0; i < 4; i++) {
                 $('.figure' + fig.id).append('<tr class="figure-' + i + '-' + fig.id + '"></tr>');
@@ -19,6 +18,7 @@ $.ajax({
                     }
                 }
             }
+            $('.figure-div-' + fig.id).append('<button class="deleteLink" id="' + fig.id + '"></button>');//figures-api/deleteFigure/' + fig.id + '">Удалить</p>')
             $('#' + fig.id).on('click', function (){
                 $.ajax({
                     type: 'GET',

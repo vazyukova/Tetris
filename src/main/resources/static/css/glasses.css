@@ -10,6 +10,9 @@
     text-align:center;
 }
 
+.add:active{
+    background: #c9f3f1;
+}
 
 .table {
     width: 90%;
