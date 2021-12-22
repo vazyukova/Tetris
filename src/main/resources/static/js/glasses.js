@@ -1,4 +1,13 @@
-console.log("Загрузился");
+$('.add').on('click', function(){
+    $('.modal').addClass('active');
+    $('.overlay').addClass('active');
+})
+
+$('.modal_cross').on('click', function(){
+    $('.modal').removeClass('active');
+    $('.overlay').removeClass('active');
+})
+
 $("#saveButton").on("click", function(){
     let heightValue = $('#height').val();
     let widthValue = $('#width').val();

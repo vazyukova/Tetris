@@ -4,21 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Стаканы</title>
+    <style>
+        .overlay {
+            opacity: 0;
+            visibility: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .5);
+            z-index: 20;
+            transition: .3s all;
+        }
+
+        .modal {
+            opacity: 0;
+            visibility: hidden;
+            width: 100%;
+            max-width: 500px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+            box-shadow: 0 3px 10px -.5px rgba(0, 0, 0, .2);
+            text-align: center;
+            padding: 30px;
+            border-radius: 3px;
+            background-color: #fff;
+            transition: 0.3s all;
+        }
+        .modal_cross {
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            fill: #444;
+            cursor: pointer;
+        }
+        .active{
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
 </head>
 <body>
 <a th:href="@{/main}"><div class="menu-item">Вернуться на главную страницу</div></a>
-<div class="edit-modal" style="background-color: white" th:if="${editG}">
+<div class="modal active" style="background-color: white" th:if="${editG}">
+    <svg class="modal_cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>
     <form th:action="@{/editGlass/{id}(id=${editG.getId()})}" method="post" th:class="form-container">
         <input type="number" name="id" id="id" th:value="${editG.getId()}" hidden>
         <label for="height"> Высота: </label>
         <input type="number" name="height" id="height" th:value="${editG.getHeight()}" placeholder="Высота"/>
-
+        <br>
         <label for="width"> Ширина:</label>
         <input type="number" name="width" id="width" th:value="${editG.getWidth()}" placeholder="Ширина"/>
-
+        <br>
         <input type="submit" value="Сохранить" th:class="submit_btn"/>
     </form>
 </div>
+<div class="overlay active" id="overlay-modal"></div>
 <table>
     <thead>
     <tr>
@@ -37,5 +84,8 @@
     </tr>
     </tbody>
 </table>
+<script type="text/javascript"
+        src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" th:src="@{/js/edit-glass.js}"></script>
 </body>
 </html>
