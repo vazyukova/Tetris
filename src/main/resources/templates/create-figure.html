@@ -2,17 +2,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Создание фигуры</title>
+    <title>Тетрис. Создание фигуры</title>
     <style>
         td {
             border: 1px black solid;
             color: white;
         }
+        .menu-item{
+            width: 30px;
+            height: 30px;
+            background-image: url("https://img.icons8.com/ios/30/000000/home-page.png");
+            background-repeat: no-repeat;
+        }
+        .save{
+            text-decoration: none;
+            margin: 5pt;
+            color: black;
+            padding: 15px 20px;
+            cursor: pointer;
+            width: 200px;
+            border: 2px solid lightgrey;
+            background: #f3f3f3;
+            text-align:center;
+        }
     </style>
 </head>
 <body>
-<a th:href="@{/main}"><div class="menu-item">Вернуться на главную страницу</div></a>
-    <table class="figure" style="border: 1px black solid">
+<a th:href="@{/main}"><div class="menu-item"></div></a>
+    <table class="figure" style="border: 2px solid #254141; margin-left: 30pt">
       <tr>
         <td id="0-0">000</td>
         <td id="0-1">000</td>
