@@ -1,7 +1,19 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url(http://fonts.gstatic.com/s/roboto/v15/mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2);
+}
+
 html, body {
+    background-image: url("https://psv4.userapi.com/c236331/u231309478/docs/d53/b5c9cb59850d/IMG_3863.png?extra=SFYI64RUvzy-56mBK0cMNWYFXMCBdMu_q7jqvtifwjVfyWoWOJiCs_3D4lQWM0w4K_CvJMwBIa84VXdm7fB-BTUNR_RrI5QBNEmgzfHD2vJa0sMDy7nl3gew_k8AuRXwS1HE75ocGAeDf3-LZ480MKo");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #52d7be;
     height: 100%;
     margin: 0;
     font-size: 15px;
+    font-family: Roboto;
 }
 .menu-wrapper {
     width: 250px;
@@ -9,6 +21,7 @@ html, body {
     margin: 110px auto 0;
     border: 2px solid lightgrey;
     padding: 10px;
+    background-color: white;
 }
 
 .menu-wrapper a{
@@ -18,8 +31,6 @@ html, body {
     padding: 16px 20px;
     cursor: pointer;
     width: 200px;
-    border: 2px solid lightgrey;
-    background: #f3f3f3;
     text-align:center;
 }
 .menu-wrapper a:active{
@@ -54,7 +65,7 @@ html, body {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-    border: 2px solid lightgrey;
+    background: rgba(25, 241, 208, 0.94);
 }
 
 .logout_btn:active{
@@ -69,12 +80,10 @@ html, body {
     color: black;
     padding: 5px;
     border: none;
-    background: white;
     cursor: pointer;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     margin-bottom: 10px;
-    opacity: 0.8;
     font-size: 15px;
     font-weight: bold;
 }
@@ -83,7 +92,8 @@ html, body {
     position: absolute;
     top:2px;
     right:60px;
-    background-image: url("https://img.icons8.com/ios/30/000000/info--v1.png");
+    background-color: #6cd5ff;
+    background-image: url("https://img.icons8.com/ios/50/000000/info--v1.png");
     background-repeat: no-repeat;
 }
 
@@ -91,7 +101,8 @@ html, body {
     position: absolute;
     top:2px;
     right:10px;
-    background-image: url("https://img.icons8.com/ios/30/000000/help.png");
+    background-color: #ff7dc9;
+    background-image: url("https://img.icons8.com/ios/50/000000/help.png");
     background-repeat: no-repeat;
 }
 
@@ -153,10 +164,29 @@ html, body {
     padding: 15px 20px;
     cursor: pointer;
     width: 200px;
-    border: 2px solid lightgrey;
     background: #f3f3f3;
     text-align:center;
 }
 .modal .modal-item:active{
     background: #c9f3f1;
+}
+
+#game-button, #easy-game, #easy-lvl{
+    background: #1af1d0;
+}
+
+#statistic-btn, #norm-game, #norm-lvl{
+    background:#fde532;
+}
+
+#glasses-btn, #hard-game, #hard-lvl{
+    background: #f86dc2;
+}
+
+#figures-btn{
+    background: #a673e8;
+}
+
+#level-button{
+    background: #1dbcf6;
 }
