@@ -1,8 +1,21 @@
-html, body {
-    height: 100%;
-    margin: 0;
+@font-face {
+    font-family: 'Roboto';
+    src: url(http://fonts.gstatic.com/s/roboto/v15/mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2);
 }
 
+html, body {
+    background-image: url("https://psv4.userapi.com/c236331/u231309478/docs/d53/b5c9cb59850d/IMG_3863.png?extra=SFYI64RUvzy-56mBK0cMNWYFXMCBdMu_q7jqvtifwjVfyWoWOJiCs_3D4lQWM0w4K_CvJMwBIa84VXdm7fB-BTUNR_RrI5QBNEmgzfHD2vJa0sMDy7nl3gew_k8AuRXwS1HE75ocGAeDf3-LZ480MKo");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #52d7be;
+
+    height: 100%;
+    margin: 0;
+    font-size: 15px;
+    font-family: Roboto;
+}
 body {
     display: flex;
     align-items: center;
@@ -17,13 +30,13 @@ p{
 }
 
 .error{
-    background: #ffa99d;
+    background: #ff553e;
     border: 2px solid #d32f2f;
     padding: 2pt;
     z-index: 2;
 }
 .warning{
-    background: #f8f2ac;
+    background: #fff44e;
     border: 2px solid #ffe433;
     padding: 2pt;
     z-index: 1;
@@ -70,7 +83,7 @@ p{
 }
 
 .form-container input[type=text]:focus, .form-container input[type=password]:focus {
-    background-color: #ddd;
+    background-color: #befcd9;
     outline: none;
 }
 
@@ -78,7 +91,7 @@ p{
 .form-container .submit_btn {
     color: black;
     padding: 16px 20px;
-    border: none;
+    border:none;
     cursor: pointer;
     width: 200px;
     margin-bottom: 10px;
@@ -88,7 +101,7 @@ p{
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-    border: 2px solid lightgrey;
+    background: #1af1d0;
 }
 
 .form-container .submit_btn:active{
