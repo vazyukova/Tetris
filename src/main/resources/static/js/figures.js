@@ -1,3 +1,4 @@
+let tetraminosIds = [55, 56, 57, 58, 59, 60, 61, 62, 63];
 $.ajax({
     type: 'GET',
     contentType: "application/json",
@@ -18,17 +19,23 @@ $.ajax({
                     }
                 }
             }
-            $('.figure-div-' + fig.id).append('<button class="deleteLink" id="' + fig.id + '"></button>');//figures-api/deleteFigure/' + fig.id + '">Удалить</p>')
-            $('#' + fig.id).on('click', function (){
-                $.ajax({
-                    type: 'GET',
-                    contentType: "application/json",
-                    url: '/api/deleteFigure/' + fig.id,
-                    success: function (){
-                        location.reload();
-                    }
-                })
-            });
+            if (!contains(tetraminosIds, fig.id)) {
+                $('.figure-div-' + fig.id).append('<button class="deleteLink" id="delete-' + fig.id + '"></button>');
+                $('.figure-div-' + fig.id).append('<button class="editLink" id="edit-' + fig.id + '">Ред</button>');
+                $('#delete-' + fig.id).on('click', function () {
+                    $.ajax({
+                        type: 'GET',
+                        contentType: "application/json",
+                        url: '/api/deleteFigure/' + fig.id,
+                        success: function () {
+                            location.reload();
+                        }
+                    })
+                });
+                $('#edit-' + fig.id).on('click', function () {
+                    location.href = "/editFigure/" + fig.id;
+                });
+            }
         });
 
     }, // обработка ответа от сервера
@@ -60,4 +67,13 @@ function getMatrixFromStr(str){
         i++;
     })
     return matrix;
+}
+
+function contains(arr, elem) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] === elem) {
+            return true;
+        }
+    }
+    return false;
 }

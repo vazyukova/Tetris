@@ -11,12 +11,8 @@
 
          </div>
         <div class="menu-wrapper">
-            <form th:action="@{/}" method="post" >
-                <input type="submit" value="" class="aboutDev_btn"/>
-            </form>
-            <form th:action="@{/}" method="post" >
-                <input type="submit" value="" class="aboutSyst_btn"/>
-            </form>
+            <a class="aboutDev_btn" th:href="@{/info-students}"></a>
+            <a class="aboutSyst_btn" th:href="@{/info-system}"></a>
             <h1 th:inline="text">Игра «Тетрис»</h1>
             <div class="menu-items">
                 <a id="game-button" href=#><div class="menu-item">Играть</div></a>

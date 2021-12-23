@@ -43,8 +43,10 @@ public class REST {
 
     @PostMapping(value = "/saveFigure", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Figure> saveResults(@RequestBody Figure figure) {
-        List<Figure> figures = figureService.findByMatrix(figure.getMatrix());
         Figure figureSaved = figureService.save(figure);
+        if (figureSaved == null){
+            return ResponseEntity.status(422).build();
+        }
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .buildAndExpand(figureSaved.getId())
                     .toUri();
@@ -140,7 +142,7 @@ public class REST {
     public ResponseEntity<Glass> saveGlass(@RequestBody Glass glass) {
         Glass savedGlass = glassService.save(glass);
         if (savedGlass == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(422).build();
         } else {
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .buildAndExpand(savedGlass.getId())
@@ -149,5 +151,28 @@ public class REST {
             return ResponseEntity.created(uri)
                     .body(savedGlass);
         }
+    }
+    @GetMapping(value = "/getFigure/{id}")
+    public ResponseEntity<Figure> getFigure(@PathVariable(name = "id") int id){
+        Figure figure = figureService.findById(id);
+        if (figure == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return new ResponseEntity<Figure>(figure, HttpStatus.OK);
+        }
+    }
+
+    @PostMapping(value = "/editFigure/{id}", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Figure> saveResults(@PathVariable(name = "id") int id, @RequestBody Figure figure) {
+        figure.setId(id);
+        Figure figureSaved = figureService.save(figure);
+        if (figureSaved == null){
+            return ResponseEntity.status(422).build();
+        }
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .buildAndExpand(figureSaved.getId())
+                .toUri();
+        return ResponseEntity.created(uri)
+                .body(figureSaved);
     }
 }

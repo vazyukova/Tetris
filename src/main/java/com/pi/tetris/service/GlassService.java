@@ -17,7 +17,13 @@ public class GlassService {
     }
 
     public Glass save(Glass glass){
-        return glassRepository.save(glass);
+        List<Glass> duplicateGlasses = findByHeightAndWidth(glass.getHeight(), glass.getWidth());
+        if (duplicateGlasses.isEmpty()) {
+            return glassRepository.save(glass);
+        }
+        else{
+            return null;
+        }
     }
 
     public List<Glass> findAll(){
@@ -30,5 +36,9 @@ public class GlassService {
 
     public Optional<Glass> getById(int id){
         return glassRepository.findById(id);
+    }
+
+    public List<Glass> findByHeightAndWidth(int height, int width){
+        return glassRepository.findByHeightAndWidth(height, width);
     }
 }

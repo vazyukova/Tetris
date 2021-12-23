@@ -25,6 +25,11 @@ $("#saveButton").on("click", function(){
             data: JSON.stringify({'height': heightValue, 'width': widthValue}),
             success: function (data) {
 
+            },
+            complete: function (xhr){
+                if (xhr.status === 422){
+                    alert("Такой стакан уже существует");
+                }
             }
         });
         location.reload();

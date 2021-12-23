@@ -26,7 +26,11 @@ public class FigureService {
     }
 
     public Figure save(Figure figure){
-        return figureRepository.save(figure);
+        List<Figure> duplicateFigures = findByMatrix(figure.getMatrix());
+        if (duplicateFigures.isEmpty())
+            return figureRepository.save(figure);
+        else
+            return null;
     }
 
     public Figure findById(int id){

@@ -46,7 +46,6 @@ public class GlassesController {
     @GetMapping("/editGlass/{id}")
     public String editGlassView(@PathVariable(name = "id") int id, Model model){
         Glass editGlass = glassService.getById(id).get();
-        System.out.println(editGlass.getHeight() + " " + editGlass.getWidth());
         model.addAttribute("editG", editGlass);
         List<Glass> glasses = glassService.findAll();
         model.addAttribute("glasses", glasses);
