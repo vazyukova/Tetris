@@ -3,3 +3,32 @@ $('.modal_cross').on('click', function(){
     $('.overlay').removeClass('active');
     location.href = '/glasses';
 })
+
+$("#saveButton").on("click", function(){
+    let heightValue = $('#height').val();
+    let widthValue = $('#width').val();
+    let idValue = $('#idGlass').val();
+    console.log("высота " + heightValue + " ширина" + widthValue);
+    if (heightValue < 15 || heightValue > 49 || widthValue < 7 || widthValue > 25){
+        alert("Ширина стакана должна быть от 8 до 24 \n" +
+            "Высота стакана должна быть от 16 до 48");
+    }
+    else {
+        $.ajax({
+            url: 'api/editGlass/' + idValue,
+            method: 'POST',
+            dataType: 'application/json',
+            contentType: 'application/json',
+            data: JSON.stringify({'height': heightValue, 'width': widthValue}),
+            success: function (data) {
+
+            },
+            complete: function (xhr){
+                if (xhr.status === 422){
+                    alert("Такой стакан уже существует");
+                }
+            }
+        });
+        location.reload();
+    }
+});

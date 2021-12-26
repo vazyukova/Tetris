@@ -27,4 +27,20 @@ public class StatisticService {
     public List<Statistic> findAll(){
         return statisticRepository.findAll();
     }
+
+    public List<Statistic> findByUserOrderByResult(Usr user){
+        return statisticRepository.findByUserOrderByResultDesc(user);
+    }
+
+    public List<Statistic> findByUserOrderByTime(Usr user){
+        return statisticRepository.findByUserOrderByTime(user);
+    }
+
+    public List<Statistic> findBestByResult(){
+        return statisticRepository.findFirst10ByOrderByResultDesc();
+    }
+
+    public List<Statistic> findBestByTime(){
+        return statisticRepository.findFirst10ByOrderByTime();
+    }
 }

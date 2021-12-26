@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
     @GetMapping("/main")
-    public String getRegistrationPage()
+    public String getRegistrationPage(Model model)
     {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(user.getAuthorities());
+        model.addAttribute("role", user.getAuthorities());
         return "main";
     }
 

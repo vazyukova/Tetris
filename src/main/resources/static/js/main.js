@@ -13,3 +13,10 @@ $('.modal_cross').on('click', function(){
     $('#game').removeClass('active');
     $('.overlay').removeClass('active');
 })
+
+let role = $('#role').val();
+if (role === '[USER]'){
+    $('#glasses-btn').prop('hidden', true);
+    $('#figures-btn').prop('hidden', true);
+    $('#level-button').prop('hidden', true);
+}

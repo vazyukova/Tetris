@@ -7,6 +7,7 @@
         <link media="all" th:href="@{/css/main.css}" rel="stylesheet" type="text/css"/>
     </head>
     <body>
+        <input id="role" th:value="${role}" hidden>
         <div class="about">
 
          </div>
@@ -15,8 +16,10 @@
             <a class="aboutSyst_btn" th:href="@{/info-system}"></a>
             <h1 th:inline="text">Игра «Тетрис»</h1>
             <div class="menu-items">
+
                 <a id="game-button" href=#><div class="menu-item">Играть</div></a>
                 <a id="statistic-btn" th:href="@{/statistic}"><div class="menu-item">Статистика</div></a>
+                <a id="settings-btn" th:href="@{/settings}"><div class="menu-item">Настройки</div></a>
                 <a id="glasses-btn" th:href="@{/glasses}"><div class="menu-item">Стаканы</div></a>
                 <a id="figures-btn" th:href="@{/figures}"><div class="menu-item">Фигуры</div></a>
                 <a id="level-button" href=#><div class="menu-item">Уровни сложности</div></a>

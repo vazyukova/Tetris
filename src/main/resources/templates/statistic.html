@@ -7,22 +7,30 @@
     <link media="all" th:href="@{/css/statistic.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+    <input id="type" value="best" hidden>
+    <button id="my-stat">Моя статистика</button>
+    <button id="best" disabled>Лучшие игроки</button>
+    <select id="resultType">
+        <option selected value="1">По очкам</option>
+        <option value="2">По времени</option>
+    </select>
     <a th:href="@{/main}"><div class="menu-item"></div></a>
-    <table class="table">
+    <table id="allStatistics" class="table">
         <thead>
         <tr>
             <th>Пользователь</th>
-            <th>Очки</th>
-            <th>Время</th>
+            <th id="typeth">Очки</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="st : ${statistics}">
             <td th:text="${st.getUser().getUsername()}"></td>
             <td th:text="${st.getResult()}"></td>
-            <td th:text="${st.getTime()}"></td>
         </tr>
         </tbody>
     </table>
+    <script type="text/javascript"
+            src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript" th:src="@{/js/statistic.js}"></script>
 </body>
 </html>

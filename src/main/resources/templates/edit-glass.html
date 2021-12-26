@@ -54,15 +54,15 @@
 <a th:href="@{/main}"><div class="menu-item">Вернуться на главную страницу</div></a>
 <div class="modal active" style="background-color: white" th:if="${editG}">
     <svg class="modal_cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>
-    <form th:action="@{/editGlass/{id}(id=${editG.getId()})}" method="post" th:class="form-container">
-        <input type="number" name="id" id="id" th:value="${editG.getId()}" hidden>
+    <form th:class="form-container">
+        <input type="number" name="id" id="idGlass" th:value="${editG.getId()}" hidden>
         <label for="height"> Высота: </label>
         <input type="number" name="height" id="height" th:value="${editG.getHeight()}" placeholder="Высота"/>
         <br>
         <label for="width"> Ширина:</label>
         <input type="number" name="width" id="width" th:value="${editG.getWidth()}" placeholder="Ширина"/>
         <br>
-        <input type="submit" value="Сохранить" th:class="submit_btn"/>
+        <input id="saveButton" type="submit" value="Сохранить" th:class="submit_btn"/>
     </form>
 </div>
 <div class="overlay active" id="overlay-modal"></div>

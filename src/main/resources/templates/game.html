@@ -9,13 +9,24 @@
   <input hidden id="levelId" th:value="${level.getId()}">
   <input hidden id="height" th:value="${level.getGlass().getHeight()}">
   <input hidden id="width" th:value="${level.getGlass().getWidth()}">
-  <canvas id="game"></canvas>
+  <input hidden id="speed" th:value="${level.getSpeed()}">
+  <input hidden id="grid" th:value="${settings.getGrid()}">
+  <input hidden id="next" th:value="${settings.getNext()}">
+  <input hidden id="stat" th:value="${settings.getStat()}">
+  <div style="display: flex">
+    <div style="flex-direction: column">
+      <p id="time">время</p>
+      <p id="result">результат</p>
+    </div>
+    <canvas id="game"></canvas>
+    <table id="nextFig"></table>
+  </div>
   <div class="modal">
     <p>Игра окончена!</p>
     <p>Сохранить результаты?</p>
-    <label><b>Очки</b></label>
+    <label id="resLabel"><b>Очки</b></label>
     <p class="results"></p>
-    <label><b>Время</b></label>
+    <label id="timeLabel"><b>Время</b></label>
     <p class="time"></p>
       <input id="user" hidden th:value="${username}">
       <div style="display:flex">

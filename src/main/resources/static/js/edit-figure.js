@@ -64,6 +64,10 @@ $('.save').on('click', function () {
                     location.reload();
                     alert('Такая фигура уже существует');
                 }
+                else if (jqXHR.status === 400){
+                    location.reload();
+                    alert('Нарушена целостность фигуры');
+                }
             }
         });
     }

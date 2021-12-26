@@ -20,7 +20,7 @@ public class StatisticController {
     @GetMapping("/statistic")
     public String getRegistrationPage(Model model)
     {
-        List<Statistic> statistics = statisticService.findAll();
+        List<Statistic> statistics = statisticService.findBestByResult();
         model.addAttribute("statistics", statistics);
         return "statistic";
     }

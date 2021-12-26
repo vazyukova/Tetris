@@ -8,6 +8,7 @@ const grid = 32;
 var tetrominoSequence = [];
 var nowDate = new Date();
 var time;
+var t = 0;
 
 var results = 0;
 
@@ -16,8 +17,10 @@ var results = 0;
 var playfield = [];
 var height = $('#height').val();
 var width = $('#width').val();
+var speed = $('#speed').val();
 $('#game').attr('height', 32 * height);
 $('#game').attr('width', 32 * width);
+$('#result').text(0);
 // заполняем сразу массив пустыми ячейками
 for (let row = -2; row < height; row++) {
     playfield[row] = [];
@@ -28,17 +31,29 @@ for (let row = -2; row < height; row++) {
 }
 
 for (var x = grid; x < grid * width; x += 32) {
+    context.strokeStyle = "#888";
     context.moveTo(x, 0);
     context.lineTo(x, grid * width);
-    context.strokeStyle = "#888";
     context.stroke();
 }
 
 for (var y = grid; y < grid * height; y += 32) {
+    context.strokeStyle = "#888";
     context.moveTo(0, y);
     context.lineTo(grid * height, y);
-    context.strokeStyle = "#888";
     context.stroke();
+}
+
+if ($('#stat').val() === '1') {
+    $('#result').prop('hidden', true);
+    setInterval(setTimer, 1000);
+}
+else if ($('#stat').val() === '2'){
+    $('#time').prop('hidden', true);
+}
+else{
+    $('#result').prop('hidden', true);
+    $('#time').prop('hidden', true);
 }
 
 // как рисовать каждую фигуру
@@ -96,12 +111,22 @@ const colors = {
 let count = 0;
 // текущая фигура в игре
 let tetromino = getNextTetromino();
+//следующая фигура
+let nextTetromino = getNextTetromino();
+printNextFig(nextTetromino)
 // следим за кадрами анимации, чтобы если что — остановить игру
 let rAF = null;
 // флаг конца игры, на старте — неактивный
 let gameOver = false;
 
-
+function setTimer(){
+    t++;
+    let minutes = Math.floor(t / 60);
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    let sec = t % 60;
+    sec = sec < 10 ? '0' + sec : sec;
+    $('#time').text(Math.floor(t / 60) + ":" + t % 60);
+}
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -148,6 +173,22 @@ function getNextTetromino() {
         row: row,        // текущая строка (фигуры стартую за видимой областью холста)
         col: col         // текущий столбец
     };
+}
+
+//отрисовываем следующую фигуру
+function printNextFig(tetr){
+    $('#nextFig tbody').empty();
+    console.log(tetr.name)
+    for (var i = 0; i < tetr.matrix.length; i++) {
+        $('#nextFig').append('<tr class="figure-tr' + i + '"></tr>');
+        for (var j = 0; j < tetr.matrix.length; j++) {
+            if (tetr.matrix[i][j] === 0) {
+                $('.figure-tr' + i).append('<td style="color:white">0000</td>');
+            } else {
+                $('.figure-tr' + i).append('<td style="background-color:' + colors[tetr.name] + '; color:' + colors[tetr.name] +'">1111</td>');
+            }
+        }
+    }
 }
 
 // поворачиваем матрицу на 90 градусов
@@ -205,6 +246,7 @@ function placeTetromino() {
         // если ряд заполнен
         if (playfield[row].every(cell => !!cell)) {
             results += 10;
+            $('#result').text(results);
             // очищаем его и опускаем всё вниз на одну клетку
             for (let r = row; r >= 0; r--) {
                 for (let c = 0; c < playfield[r].length; c++) {
@@ -218,7 +260,10 @@ function placeTetromino() {
         }
     }
     // получаем следующую фигуру
-    tetromino = getNextTetromino();
+    tetromino = nextTetromino;
+    nextTetromino = getNextTetromino();
+    console.log(nextTetromino);
+    printNextFig(nextTetromino);
 }
 
 // показываем надпись Game Over
@@ -229,13 +274,28 @@ function showGameOver() {
     gameOver = true;
     var endDate = new Date();
     time = endDate.getTime() - nowDate.getTime();
-    $('.modal').addClass('active');
-    $('.results').append(results);
-    $('.time').append(Math.floor(time / 60000) + ":" + Math.floor((time % 60000) / 1000));
+    if ($('#stat').val() !== '0') {
+        $('.modal').addClass('active');
+        if ($('#stat').val() === '2') {
+            $('.results').append(results);
+            $('#timeLabel').prop('hidden', true);
+        }
+        else {
+            $('#resLabel').prop('hidden', true);
+            $('.time').append(Math.floor(time / 60000) + ":" + Math.floor((time % 60000) / 1000));
+        }
+    }
+    else{
+        location.href = '/main';
+    }
 }
 
 $('.saveButton').on('click', function (event) {
     event.preventDefault();
+    if ($('#stat').val() === '1')
+        results = -1;
+    else
+        time = 0;
     $.ajax({
         type: 'POST',
         contentType: "application/json",
@@ -270,10 +330,10 @@ function loop() {
 
     // рисуем текущую фигуру
     if (tetromino) {
-
         // фигура сдвигается вниз каждые 35 кадров
-        if (++count > 35) {
+        if (++count > 52 / (speed * speed * speed)) {
             tetromino.row++;
+
             count = 0;
 
             // если движение закончилось — рисуем фигуру в поле и проверяем, можно ли удалить строки
@@ -290,7 +350,6 @@ function loop() {
         for (let row = 0; row < tetromino.matrix.length; row++) {
             for (let col = 0; col < tetromino.matrix[row].length; col++) {
                 if (tetromino.matrix[row][col]) {
-
                     // и снова рисуем на один пиксель меньше
                     context.fillRect((tetromino.col + col) * grid, (tetromino.row + row) * grid, grid-1, grid-1);
                 }

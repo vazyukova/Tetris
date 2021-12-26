@@ -52,7 +52,7 @@ $('.saveLevel').on('click', function (){
         url: '/api/saveLevel/' + levelId,
         data: JSON.stringify($('.speed').val()),
         success: function (){
-            location.reload();
+            location.href = '/main';
         }
     })
 });

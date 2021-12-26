@@ -21,14 +21,16 @@ public class REST {
     private final GlassService glassService;
     private final UserService userService;
     private final StatisticService statisticService;
+    private final SettingsService settingsService;
 
     public REST(FigureService figureService, LevelService levelService, GlassService glassService,
-                UserService userService, StatisticService statisticService) {
+                UserService userService, StatisticService statisticService, SettingsService settingsService) {
         this.figureService = figureService;
         this.levelService = levelService;
         this.glassService = glassService;
         this.userService = userService;
         this.statisticService = statisticService;
+        this.settingsService = settingsService;
     }
 
     @GetMapping(value = "/figures", consumes = "application/json", produces = "application/json")
@@ -47,11 +49,27 @@ public class REST {
         if (figureSaved == null){
             return ResponseEntity.status(422).build();
         }
+        else if (figureSaved.getMatrix() == null){
+            return ResponseEntity.status(400).build();
+        }
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .buildAndExpand(figureSaved.getId())
                     .toUri();
         return ResponseEntity.created(uri)
                     .body(figureSaved);
+    }
+
+    @PostMapping("/saveSettings/{username}")
+    public ResponseEntity<Settings> registration(@PathVariable(name="username") String username, @RequestBody Settings settings)
+    {
+        Usr userFromDb = userService.findByUsername(username);
+        settings.setUser(userFromDb);
+        Settings savedSettings = settingsService.save(settings);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .buildAndExpand(savedSettings.getId())
+                .toUri();
+        return ResponseEntity.created(uri)
+                .body(savedSettings);
     }
 
     @GetMapping(value = "/deleteFigure/{id}")
@@ -62,6 +80,50 @@ public class REST {
             return ResponseEntity.notFound().build();
         } else {
             return new ResponseEntity<>(figures, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/getMyStatistic/ByResult")
+    public ResponseEntity<List<Statistic>> getMyStatisticByResult() {
+        User appUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Usr user = userService.findByUsername(appUser.getUsername());
+        List<Statistic> myStatistics = statisticService.findByUserOrderByResult(user);
+        if (myStatistics == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return new ResponseEntity<>(myStatistics, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/getMyStatistic/ByTime")
+    public ResponseEntity<List<Statistic>> getMyStatisticByTime() {
+        User appUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Usr user = userService.findByUsername(appUser.getUsername());
+        List<Statistic> myStatistics = statisticService.findByUserOrderByTime(user);
+        if (myStatistics == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return new ResponseEntity<>(myStatistics, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/getBestStatistic/ByResult")
+    public ResponseEntity<List<Statistic>> getBestStatisticByResult() {
+        List<Statistic> myStatistics = statisticService.findBestByResult();
+        if (myStatistics == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return new ResponseEntity<>(myStatistics, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/getBestStatistic/ByTime")
+    public ResponseEntity<List<Statistic>> getBestStatisticByTime() {
+        List<Statistic> myStatistics = statisticService.findBestByTime();
+        if (myStatistics == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return new ResponseEntity<>(myStatistics, HttpStatus.OK);
         }
     }
 
@@ -152,6 +214,23 @@ public class REST {
                     .body(savedGlass);
         }
     }
+
+    @PostMapping(value = "/editGlass/{id}", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Glass> editGlass(@PathVariable int id, @RequestBody Glass glass) {
+        glass.setId(id);
+        Glass savedGlass = glassService.save(glass);
+        if (savedGlass == null) {
+            return ResponseEntity.status(422).build();
+        } else {
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .buildAndExpand(savedGlass.getId())
+                    .toUri();
+
+            return ResponseEntity.created(uri)
+                    .body(savedGlass);
+        }
+    }
+
     @GetMapping(value = "/getFigure/{id}")
     public ResponseEntity<Figure> getFigure(@PathVariable(name = "id") int id){
         Figure figure = figureService.findById(id);

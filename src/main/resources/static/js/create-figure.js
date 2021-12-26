@@ -24,7 +24,6 @@ $('td').on('click', function () {
 })
 
 $('.save').on('click', function () {
-    if (check(matrix)) {
         for (var i = 0; i < 4; i++) {
             for (var j = 0; j < 4; j++) {
                 matrixStr += matrix[i][j] + ",";
@@ -44,54 +43,77 @@ $('.save').on('click', function () {
                     location.reload();
                     alert('Такая фигура уже существует');
                 }
+                else if (jqXHR.status === 400){
+                    location.reload();
+                    alert('Нарушена целостность фигуры');
+                }
             }
         });
-    }
-    else{
-        alert("Нарушена целостность фигуры!");
-    }
 });
 
-function check(matrix){
-    for (let i = 0; i < 4; i++){
-        for (let j = 0; j < 4; j++){
-            if (matrix[i][j] === 1){
-                if (i !== 0 && i !== 3 && j !== 0 && j !== 3) {
-                    if ((matrix[i - 1][j] === 0) && (matrix[i + 1][j] === 0) && (matrix[i][j - 1] === 0) && (matrix[i][j + 1] === 0))
-                        return false;
-                }
-                else if (i === 0){
-                    if (j === 0 )
-                    {
-                        if ((matrix[i + 1][j] === 0) && (matrix[i][j + 1] === 0))
-                            return false;
-                    }
-                    else if (j === 3){
-                        if ((matrix[i + 1][j] === 0) && (matrix[i][j - 1] === 0))
-                            return false;
-                    }
-                    else{
-                        if ((matrix[i + 1][j] === 0) && (matrix[i][j - 1] === 0) && (matrix[i][j + 1] === 0))
-                            return false;
-                    }
-                }
-                else if (i === 3){
-                    if (j === 3)
-                    {
-                        if ((matrix[i - 1][j] === 0) && (matrix[i][j - 1] === 0))
-                            return false;
-                    }
-                    else if (j === 0){
-                        if ((matrix[i - 1][j] === 0) && (matrix[i][j + 1] === 0))
-                            return false;
-                    }
-                    else{
-                        if ((matrix[i - 1][j] === 0) && (matrix[i][j - 1] === 0) && (matrix[i][j + 1] === 0))
-                            return false;
-                    }
-                }
-            }
-        }
+/*function check(matrix){
+    let checked = [];
+    let current = checkFirstFill(matrix);
+    console.log(current);
+    checked.push(current);
+    let flag = true;
+    while(flag) {
+         if (checkFill(matrix, checked)){
+             flag = false;
+             return true;
+         }
+         else {
+             console.log()
+             if (current.i !== 0 && matrix[current.i - 1][current.j] === 1 && checked.indexOf({
+                 'i': current.i - 1,
+                 'j': current.j
+             }) === -1) {
+                 checked.push({'i': current.i - 1, 'j': current.j});
+                 current = {'i': current.i - 1, 'j': current.j};
+             } else if (current.i !== 3 && matrix[current.i + 1][current.j] === 1 && checked.indexOf({
+                 'i': current.i + 1,
+                 'j': current.j
+             }) === -1) {
+                 checked.push({'i': current.i + 1, 'j': current.j});
+                 current = {'i': current.i + 1, 'j': current.j};
+             } else if (current.j !== 0 && matrix[current.i][current.j - 1] === 1 && checked.indexOf({
+                 'i': current.i,
+                 'j': current.j - 1
+             }) === -1) {
+                 checked.push({'i': current.i, 'j': current.j - 1});
+                 current = {'i': current.i, 'j': current.j - 1};
+             } else if (current.j !== 3 && matrix[current.i][current.j + 1] === 1 && checked.indexOf({
+                 'i': current.i,
+                 'j': current.j + 1
+             }) === -1) {
+                 checked.push({'i': current.i, 'j': current.j + 1});
+                 current = {'i': current.i, 'j': current.j + 1};
+             } else {
+                 return false;
+             }
+         }
     }
     return true;
 }
+
+function checkFill(matrix, checked){
+    console.log(checked);
+    for (let i = 0; i < 4; i++){
+        for (let j = 0; j < 4; j++){
+            if (matrix[i][j] === 1 && (checked.indexOf({'i': i, 'j': j}) === -1))
+                console.log(i + " " + j)
+                return true;
+        }
+    }
+    return false;
+}
+
+function checkFirstFill(matrix){
+    for (let i = 0; i < 4; i++){
+        for (let j = 0; j < 4; j++){
+            if (matrix[i][j] === 1)
+            return {'i' : i, 'j' : j};
+        }
+    }
+    return null;
+}*/

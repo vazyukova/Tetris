@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Настройки</title>
+</head>
+<body>
+    <input hidden id="settingsId" th:value="${settings.getId()}">
+    <input hidden id="username" th:value="${username}">
+    <input hidden id="next1" th:value="${settings.getNext()}">
+    <input hidden id="grid1" th:value="${settings.getGrid()}">
+    <input hidden id="result1" th:value="${settings.getStat()}">
+    <h1>Настройки игры</h1>
+        <label>Включить показ следующей фигуры?</label>
+        <input type="checkbox" id="next">
+        <br>
+        <label>Включить показ сетки?</label>
+        <input type="checkbox" id="grid">
+        <br>
+        <label>Подсчет результата</label>
+        <select id="stat">
+            <option value = 0>Не вести</option>
+            <option value = 1>Очки</option>
+            <option value = 2>Время</option>
+        </select>
+        <br>
+    <button id="saveButton">Сохранить</button>
+    <script type="text/javascript"
+            src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script type="text/javascript" th:src="@{/js/settings.js}"></script>
+</body>
+</html>
