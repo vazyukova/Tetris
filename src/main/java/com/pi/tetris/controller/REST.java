@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -45,6 +47,7 @@ public class REST {
 
     @PostMapping(value = "/saveFigure", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Figure> saveResults(@RequestBody Figure figure) {
+        figure.setLevel(figure.getLevel() == null ? levelService.getById(0).get() : figure.getLevel());
         Figure figureSaved = figureService.save(figure);
         if (figureSaved == null){
             return ResponseEntity.status(422).build();
@@ -131,6 +134,21 @@ public class REST {
     public ResponseEntity<List<Figure>> getFiguresByLevel(@PathVariable(name = "levelId") int levelId){
         Level level = levelService.getById(levelId).get();
         List<Figure> figures = figureService.findByLevel(level);
+        if (levelId == 0){
+            List<Integer> tetraminosIds = new ArrayList<>();
+            tetraminosIds.add(55);
+            tetraminosIds.add(56);
+            tetraminosIds.add(57);
+            tetraminosIds.add(58);
+            tetraminosIds.add(59);
+            tetraminosIds.add(60);
+            tetraminosIds.add(61);
+            tetraminosIds.add(62);
+            tetraminosIds.add(63);
+            figures = figures.stream()
+                    .filter(fig -> tetraminosIds.contains(fig.getId()))
+                    .collect(Collectors.toList());
+        }
         if (figures == null) {
             return ResponseEntity.notFound().build();
         } else {
@@ -248,6 +266,9 @@ public class REST {
         Figure figureSaved = figureService.save(figure);
         if (figureSaved == null){
             return ResponseEntity.status(422).build();
+        }
+        else if (figureSaved.getMatrix() == null){
+            return ResponseEntity.status(400).build();
         }
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .buildAndExpand(figureSaved.getId())

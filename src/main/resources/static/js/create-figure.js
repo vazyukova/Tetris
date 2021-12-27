@@ -50,7 +50,7 @@ $('.save').on('click', function () {
             }
         }).fail(function() {
             alert("Разорвано соединение с сервером")
-        });;
+        });
 });
 
 /*function check(matrix){

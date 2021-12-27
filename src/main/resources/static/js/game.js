@@ -13,16 +13,17 @@ let tetromino;
 let nextTetromino;
 let rAF;
 let gameOver;
+var level = $('#levelId').val();
 
 var results = 0;
 
 //загружаем фигуры по уровню сложности
 let tetrominos = [];
-//for (let i = level; i > -1; i--) {
+for (let i = Number(level); i > -1; i--) {
     $.ajax({
         type: 'GET',
         contentType: "application/json",
-        url: '/api/figures/1',
+        url: '/api/figures/' + i,
         success: function (data) {
             console.log(data);
             data.forEach(function (fig) {
@@ -52,7 +53,7 @@ let tetrominos = [];
             gameOver = false;
         }
     });
-//}
+}
 
 // с помощью двумерного массива следим за тем, что находится в каждой клетке игрового поля
 // размер поля, и несколько строк ещё находится за видимой областью
@@ -60,7 +61,6 @@ var playfield = [];
 var height = $('#height').val();
 var width = $('#width').val();
 var speed = $('#speed').val();
-var level = $('#levelId')
 $('#game').attr('height', 32 * height);
 $('#game').attr('width', 32 * width);
 $('#result').text(0);
@@ -323,19 +323,18 @@ function showGameOver() {
     gameOver = true;
     var endDate = new Date();
     time = endDate.getTime() - nowDate.getTime();
-    if ($('#stat').val() !== '0') {
-        $('.modal').addClass('active');
-        if ($('#stat').val() === '1') {
-            $('.results').append(results);
-            $('#timeLabel').prop('hidden', true);
-        }
-        else {
-            $('#resLabel').prop('hidden', true);
-            $('.time').append(Math.floor(time / 60000) + ":" + Math.floor((time % 60000) / 1000));
-        }
+    $('.modal').addClass('active');
+    if ($('#stat').val() === '1') {
+        $('.results').append(results);
+        $('#timeLabel').prop('hidden', true);
+    }
+    else if ($('#stat').val() === '2') {
+        $('#resLabel').prop('hidden', true);
+        $('.time').append(Math.floor(time / 60000) + ":" + Math.floor((time % 60000) / 1000));
     }
     else{
-        location.href = '/main';
+        $('#timeLabel').prop('hidden', true);
+        $('#resLabel').prop('hidden', true);
     }
 }
 

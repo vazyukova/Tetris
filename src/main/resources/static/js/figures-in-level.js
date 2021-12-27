@@ -10,6 +10,16 @@ $.ajax({
     success: function(data) {
         data.forEach(function (fig, l){
             if (!contains(tetraminosIds, fig.id)) {
+                let flag = false;
+                if (fig.level === null)
+                {
+                    flag = true;
+                }
+                else{
+                    if (fig.level.id === Number(levelId) || fig.level.id === 0)
+                        flag = true;
+                }
+                if (flag) {
                 $('.figure-list').append('<div class="figure-div-' + fig.id + ' fig"></div>');
                 $('.figure-div-' + fig.id).append('<button class="addButton" id="' + fig.id + '">Добавить</button>');
                 if (fig.level !== null) {
@@ -38,15 +48,50 @@ $.ajax({
                         figures = jQuery.grep(figures, function (value) {
                             return value !== fig.id;
                         });
+                        $.ajax({
+                            type: 'POST',
+                            url: '/api/setFigureLevel/' + fig.id,
+                            contentType: "application/json",
+                            data: JSON.stringify(0),
+                            success: function (data) {
+                                //document.location.href = "/level/" + levelId
+                            }, // обработка ответа от сервера
+                            error: function (jqXHR) {
+                                console.log('Ошибка выполнения');
+                            },
+                            complete: function () {
+                                console.log('Завершение выполнения');
+                            }
+                        }).fail(function () {
+                            alert("Разорвано соединение с сервером");
+                        });
                         $('#' + fig.id).text('Добавить');
                         console.log(figures);
                     } else {
                         figures.splice(figures.length, 0, fig.id);
+                        $.ajax({
+                            type: 'POST',
+                            url: '/api/setFigureLevel/' + fig.id,
+                            contentType: "application/json",
+                            data: JSON.stringify(levelId),
+                            success: function (data) {
+                                //document.location.href = "/level/" + levelId
+                            }, // обработка ответа от сервера
+                            error: function (jqXHR) {
+                                console.log('Ошибка выполнения');
+                            },
+                            complete: function () {
+                                console.log('Завершение выполнения');
+                            }
+                        }).fail(function () {
+                            alert("Разорвано соединение с сервером");
+                        });
                         $('#' + fig.id).text('Удалить');
                         console.log(figures);
                     }
                 });
             }
+        }
         });
 
     }, // обработка ответа от сервера
@@ -58,7 +103,7 @@ $.ajax({
 });;
 
 $('.saveButton').on('click', function (){
-    figures.forEach(function (item) {
+    /*figures.forEach(function (item) {
         let lev;
         console.log(firstFigures);
         console.log(figures);
@@ -84,7 +129,8 @@ $('.saveButton').on('click', function (){
             }).fail(function(){
                 alert("Разорвано соединение с сервером");
             });
-        })
+        })*/
+    document.location.href = "/level/" + levelId;
 });
 
 function getMatrixFromStr(str){

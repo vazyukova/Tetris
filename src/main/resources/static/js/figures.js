@@ -43,7 +43,7 @@ $.ajax({
     complete: function() { console.log('Завершение выполнения'); }
 }).fail(function() {
     alert("Разорвано соединение с сервером")
-});;
+});
 
 function getMatrixFromStr(str){
     var matrix = [];

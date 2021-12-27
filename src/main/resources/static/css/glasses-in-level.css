@@ -76,6 +76,7 @@ html, body {
     text-align:center;
     font-weight: bold;
     background: #f86dc2;
+    cursor: pointer;
 }
 
 .select:active{

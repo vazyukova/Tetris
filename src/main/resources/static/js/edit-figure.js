@@ -8,11 +8,13 @@ for (let row = 0; row < 4; row++) {
     }
 }
 const figureId = $('#figureId').val();
+let fig;
 $.ajax({
     type: 'GET',
     contentType: "application/json",
     url: '/api/getFigure/' + figureId,
     success: function (data) {
+        fig = data;
         matrix = getMatrixFromStr(data.matrix);
         console.log(matrix);
         for (let i = 0; i < 4; i++){
@@ -28,9 +30,11 @@ $.ajax({
 })
 
 $('td').on('click', function () {
+    console.log('dofkpoe');
     var id = String($(this).attr('id'));
     var indexes = id.split('-');
-    if (matrix[Number(indexes[0])][Number(indexes[1])] === 0) {
+    console.log(indexes);
+    if (Number(matrix[Number(indexes[0])][Number(indexes[1])]) === 0) {
         $(this).css("background-color", "red");
         $(this).css("color", "red");
         matrix[Number(indexes[0])][Number(indexes[1])] = 1;
@@ -43,84 +47,39 @@ $('td').on('click', function () {
     }
 })
 
-$('.save').on('click', function () {
-    if (check(matrix)) {
+$('#save').on('click', function () {
         for (var i = 0; i < 4; i++) {
             for (var j = 0; j < 4; j++) {
                 matrixStr += matrix[i][j] + ",";
             }
             matrixStr += "|";
         }
+        let errorMessage;
         $.ajax({
             type: 'POST',
             contentType: "application/json",
             url: '/api/editFigure/' + figureId,
-            data: JSON.stringify({"matrix": matrixStr}),
+            data: JSON.stringify({"matrix": matrixStr, "level":fig.level}),
             success: function (data) {
                 document.location.href = '/figures';
             }, // обработка ответа от сервера
             error: function (jqXHR) {
                 if(jqXHR.status === 422){
                     location.reload();
-                    alert('Такая фигура уже существует');
+                    errorMessage = 'Такая фигура уже существует';
                 }
                 else if (jqXHR.status === 400){
                     location.reload();
-                    alert('Нарушена целостность фигуры');
+                    errorMessage = 'Нарушена целостность фигуры';
+                }
+                else {
+                    errorMessage = 'Разорвано соединение с сервером';
                 }
             }
         }).fail(function() {
-            alert("Разорвано соединение с сервером")
-        });;
-    }
-    else{
-        alert("Нарушена целостность фигуры!");
-    }
+            alert(errorMessage)
+        });
 });
-
-function check(matrix){
-    for (let i = 0; i < 4; i++){
-        for (let j = 0; j < 4; j++){
-            if (matrix[i][j] === 1){
-                if (i !== 0 && i !== 3 && j !== 0 && j !== 3) {
-                    if ((matrix[i - 1][j] === 0) && (matrix[i + 1][j] === 0) && (matrix[i][j - 1] === 0) && (matrix[i][j + 1] === 0))
-                        return false;
-                }
-                else if (i === 0){
-                    if (j === 0)
-                    {
-                        if ((matrix[i + 1][j] === 0) && (matrix[i][j + 1] === 0))
-                            return false;
-                    }
-                    else if (j === 3){
-                        if ((matrix[i + 1][j] === 0) && (matrix[i][j - 1] === 0))
-                            return false;
-                    }
-                    else{
-                        if ((matrix[i + 1][j] === 0) && (matrix[i][j - 1] === 0) && (matrix[i][j + 1] === 0))
-                            return false;
-                    }
-                }
-                else if (i === 3){
-                    if (j === 3)
-                    {
-                        if ((matrix[i - 1][j] === 0) && (matrix[i][j - 1] === 0))
-                            return false;
-                    }
-                    else if (j === 0){
-                        if ((matrix[i + 1][j] === 0) && (matrix[i][j + 1] === 0))
-                            return false;
-                    }
-                    else{
-                        if ((matrix[i - 1][j] === 0) && (matrix[i][j - 1] === 0) && (matrix[i][j + 1] === 0))
-                            return false;
-                    }
-                }
-            }
-        }
-    }
-    return true;
-}
 
 function getMatrixFromStr(str){
     var matrix = [];
