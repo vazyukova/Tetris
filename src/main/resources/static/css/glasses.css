@@ -1,38 +1,60 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url(http://fonts.gstatic.com/s/roboto/v15/mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2);
+}
+
+html, body {
+    background-image: url("https://cdn-ru0.puzzlegarage.com/img/puzzle/12/178_preview_r.v2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #52d7be;
+    height: 100%;
+    margin: 0;
+    font-size: 15px;
+    font-family: Roboto;
+}
+
 .add{
     text-decoration: none;
-    margin: 0 auto 15px 100px;
+    left: 10%;
+    border: none;
     color: black;
     padding: 15px 20px;
     cursor: pointer;
     width: 200px;
-    border: 2px solid lightgrey;
-    background: #f3f3f3;
     text-align:center;
+    font-weight: bold;
+    margin-top: 5pt;
+    margin-left: 100px;
+    background: #faff63;
 }
 
 .add:active{
-    background: #c9f3f1;
+    background: #fff7be;
 }
 
 .table {
+    margin-top: 10pt;
     width: 90%;
     position: relative;
     left: 50%;
+    background: white;
     transform: translate(-50%, 0);
-    border: 15px solid #F2F8F8;
-    border-top: 5px solid #F2F8F8;
+    border: 15px solid #c9ffff;
     border-collapse: collapse;
 }
 .table th {
     font-weight: bold;
     padding: 5px;
-    background: #F2F8F8;
-    border: 5px solid #F2F8F8;
+    background: #dec9ff;
+    border: 5px solid #c9ffff;
     text-align: center;
 }
 .table td {
     padding: 5px;
-    border: 5px solid #F2F8F8;
+    border: 5px solid #c9ffff;
     text-align: center;
 }
 
@@ -53,12 +75,15 @@
     background-repeat: no-repeat;
 }
 .menu-item{
-    width: 30px;
-    height: 30px;
-    background-image: url("https://img.icons8.com/ios/30/000000/home-page.png");
+    position: fixed;
+    margin-top: 5pt;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background-image: url("https://img.icons8.com/ios/50/000000/home-page.png");
     background-repeat: no-repeat;
+    background-color: #77dcff;
 }
-
 .overlay {
     opacity: 0;
     visibility: hidden;

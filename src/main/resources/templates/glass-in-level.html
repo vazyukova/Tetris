@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Стаканы в уровне</title>
+    <link media="all" th:href="@{/css/glasses-in-level.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<a th:href="@{/main}"><div class="menu-item"></div></a>
+<button class="saveButton">Сохранить</button>
 <input hidden id="levelId" th:value="${levelId}">
 <input hidden id="glassId" th:value="${glassId}">
-<table>
+<table class="table">
     <thead>
     <tr>
         <th>Номер</th>
@@ -20,11 +23,10 @@
         <td class="idG" th:text="${glass.getId()}"></td>
         <td class="height" th:text="${glass.getHeight()}"></td>
         <td class="width" th:text="${glass.getWidth()}"></td>
-        <td class="add" th:id="${glass.getId()}">Добавить</td>
+        <td class="select" th:id="${glass.getId()}">Выбрать</td>
     </tr>
     </tbody>
 </table>
-<button class="saveButton">Сохранить</button>
 <script type="text/javascript"
         src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script type="text/javascript" th:src="@{/js/glass-in-level.js}"></script>
