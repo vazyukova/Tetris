@@ -33,9 +33,6 @@ html, body {
     width: 200px;
     text-align:center;
 }
-.menu-wrapper a:active{
-    background: #c9f3f1;
-}
 
 .menu-wrapper h1{
     text-align:center;
@@ -173,23 +170,46 @@ html, body {
 #game-button, #easy-game, #easy-lvl{
     background: #1af1d0;
 }
+#game-button:active, #easy-game:active, #easy-lvl:active{
+    background: #b8fff4;
+}
 
 #statistic-btn, #norm-game, #norm-lvl{
     background:#fde532;
+}
+
+#statistic-btn:active, #norm-game:active, #norm-lvl:active{
+    background: #fff5a8;
 }
 
 #glasses-btn, #hard-game, #hard-lvl{
     background: #f86dc2;
 }
 
+#glasses-btn:active, #hard-game:active, #hard-lvl:active{
+    background: #ffb0e0;
+}
+
 #figures-btn{
     background: #a673e8;
+}
+
+#figures-btn:active{
+    background: #cfb0ff;
 }
 
 #level-button{
     background: #1dbcf6;
 }
 
+#level-button:active{
+    background: #92e2ff;
+}
+
 #settings-btn{
     background: #7ad45e;
+}
+
+#settings-btn:active{
+    background: #b3faa1;
 }

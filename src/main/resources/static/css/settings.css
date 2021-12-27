@@ -1,0 +1,94 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url(http://fonts.gstatic.com/s/roboto/v15/mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2);
+}
+
+html, body {
+    background-image: url("https://cdn-ru0.puzzlegarage.com/img/puzzle/12/178_preview_r.v2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #52d7be;
+    height: 100%;
+    margin: 0;
+    font-size: 15px;
+    font-family: Roboto;
+}
+.menu-item{
+    position: fixed;
+    margin-top: 5pt;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background-image: url("https://img.icons8.com/ios/50/000000/home-page.png");
+    background-repeat: no-repeat;
+    background-color: #77dcff;
+}
+.settings-wrapper {
+    width: 400px;
+    height: auto;
+    margin: auto 0;
+    border: 2px solid lightgrey;
+    padding: 10px;
+    background-color: white;
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.settings-wrapper h1{
+    text-align:center;
+}
+.settings-wrapper .settings-items{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+    font-size: 20px;
+    font-family: Roboto;
+}
+
+.settings-wrapper .settings-items .settings-item{
+    font-size: 20px;
+    font-family: Roboto;
+}
+
+.settings-wrapper .settings-items #saveButton{
+    color: black;
+    border: none;
+    padding: 16px 20px;
+    margin-top: 10pt;
+    cursor: pointer;
+    width: 200px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: rgb(128, 148, 255);
+}
+
+.settings-wrapper .settings-items #saveButton:active{
+    background: #92dff6;
+}
+
+.settings-wrapper .settings-items .settings-item input[type=checkbox]{
+    width: 20px;
+    height: 20px;
+}
+
+.settings-wrapper .settings-items select{
+    margin-top: 5pt;
+    font-size: 20px;
+    font-family: Roboto;
+    width: 100px;
+    background-color: #cfb0ff;
+}
+.settings-wrapper .settings-items select option{
+    font-size: 20px;
+    font-family: Roboto;
+    width: 100px;
+    background-color: #e2d2ff;
+}
