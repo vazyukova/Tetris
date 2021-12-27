@@ -1,0 +1,149 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url(http://fonts.gstatic.com/s/roboto/v15/mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2);
+}
+
+html, body {
+    background-image: url("https://cdn-ru0.puzzlegarage.com/img/puzzle/12/178_preview_r.v2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #52d7be;
+    height: 100%;
+    margin: 0;
+    font-size: 15px;
+    font-family: Roboto;
+}
+
+.menu-item {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    margin-top: 5pt;
+    border-radius: 10px;
+    background-image: url("https://img.icons8.com/ios/50/000000/home-page.png");
+    background-repeat: no-repeat;
+    background-color: #77dcff;
+}
+
+.level-wrapper {
+    width: 600pt;
+    height: auto;
+    margin: auto 0;
+    border: 2px solid lightgrey;
+    padding: 10px;
+    background-color: white;
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.level-wrapper .level-items h1, .level-wrapper .level-items h2 {
+    text-align: center;
+}
+.level-wrapper .level-items{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+    font-size: 20px;
+    font-family: Roboto;
+}
+
+.figure-list{
+    margin-top: 5pt;
+    width: 600pt;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: white;
+}
+.figure-list td{
+    border: 2px solid purple;
+    border-collapse: collapse;
+    cursor: default;
+    width: 10pt;
+    height: 10pt;
+}
+
+.level-wrapper .level-items input[type=range]{
+    width: 150pt;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#rangeList1 {
+    display: flex;
+    justify-content: space-around;
+    width: 160px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+option{
+    padding: 15pt;
+}
+
+.addFigure{
+    text-decoration: none;
+    border: none;
+    margin-top: 5pt;
+    color: black;
+    padding: 15px 20px;
+    width: 200px;
+    text-align:center;
+    font-weight: bold;
+    background: #6dff63;
+    margin-left: 20pt;
+}
+
+#change{
+    width: 300px;
+}
+
+.addFigure:active{
+    background: #e2ffbe;
+}
+
+.lvl-glass .table {
+    margin-top: 10pt;
+    width: 95%;
+    position: relative;
+    left: 50%;
+    background: white;
+    transform: translate(-50%, 0);
+    border: 15px solid #c9ffff;
+    border-collapse: collapse;
+}
+.lvl-glass .table th {
+    font-weight: bold;
+    padding: 5px;
+    background: #dec9ff;
+    border: 5px solid #c9ffff;
+    text-align: center;
+}
+.lvl-glass .table td {
+    padding: 5px;
+    border: 5px solid #c9ffff;
+    text-align: center;
+}
+
+.saveLevel{
+    text-decoration: none;
+    border: none;
+    margin-top: 5pt;
+    color: black;
+    padding: 15px 20px;
+    width: 400px;
+    text-align:center;
+    font-weight: bold;
+    font-size: 18pt;
+    background: #d87ef5;
+    margin-left: auto;
+    margin-right: auto;
+}
+.saveLevel:active{
+    background: #f5dcff;
+}

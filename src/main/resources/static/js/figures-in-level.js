@@ -20,7 +20,7 @@ $.ajax({
                         flag = true;
                 }
                 if (flag) {
-                $('.figure-list').append('<div class="figure-div-' + fig.id + ' fig"></div>');
+                $('.figure-list').append('<div class="figure-div-' + fig.id + ' fig" style="display: inline-block; border: 2px solid purple; margin: 10pt;"></div>');
                 $('.figure-div-' + fig.id).append('<button class="addButton" id="' + fig.id + '">Добавить</button>');
                 if (fig.level !== null) {
                     if (fig.level.id === Number(levelId)) {
@@ -35,9 +35,9 @@ $.ajax({
                     $('.figure' + fig.id).append('<tr class="figure-' + i + '-' + fig.id + '"></tr>');
                     for (var j = 0; j < 4; j++) {
                         if (matrix[i][j] === '0') {
-                            $('.figure-' + i + '-' + fig.id).append('<td style="color:white">000</td>');
+                            $('.figure-' + i + '-' + fig.id).append('<td style="color:white; width: 26pt; height: 26pt;">000</td>');
                         } else {
-                            $('.figure-' + i + '-' + fig.id).append('<td style="background-color: red; color: red">111</td>');
+                            $('.figure-' + i + '-' + fig.id).append('<td style="background-color: #5723EEFF; color: #5723EEFF; width: 26pt; height: 26pt;">111</td>');
                         }
                     }
                 }
