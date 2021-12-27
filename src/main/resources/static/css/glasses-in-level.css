@@ -16,34 +16,10 @@ html, body {
     font-family: Roboto;
 }
 
-.table {
-    margin-top: 10pt;
-    width: 90%;
-    position: relative;
-    left: 50%;
-    background: white;
-    transform: translate(-50%, 0);
-    border: 15px solid #c9ffff;
-    border-top: 5px solid #c5c5ff;
-    border-collapse: collapse;
-}
-.table th {
-    font-weight: bold;
-    width: 500pt;
-    padding: 5px;
-    background: #dec9ff;
-    border: 5px solid #c9ffff;
-    text-align: center;
-}
-.table td {
-    width: 500pt;
-    padding: 5px;
-    border: 5px solid #c9ffff;
-    text-align: center;
-}
 .menu-item{
     position: fixed;
     margin-top: 5pt;
+    margin-left: 5pt;
     width: 50px;
     height: 50px;
     border-radius: 10px;
@@ -51,7 +27,31 @@ html, body {
     background-repeat: no-repeat;
     background-color: #77dcff;
 }
-#my-stat, #best, #resultType{
+
+.table {
+    width: 90%;
+    position: relative;
+    margin-top: 10pt;
+    left: 50%;
+    background: white;
+    transform: translate(-50%, 0);
+    border: 15px solid #c9ffff;
+    border-collapse: collapse;
+}
+.table th {
+    font-weight: bold;
+    padding: 5px;
+    background: #dec9ff;
+    border: 5px solid #c9ffff;
+    text-align: center;
+}
+.table td {
+    padding: 5px;
+    border: 5px solid #c9ffff;
+    text-align: center;
+}
+
+.saveButton{
     text-decoration: none;
     left: 10%;
     border: none;
@@ -61,24 +61,23 @@ html, body {
     width: 200px;
     text-align:center;
     font-weight: bold;
-}
-#my-stat{
     margin-top: 5pt;
     margin-left: 100px;
     background: #faff63;
 }
-#best{
-    margin-top: 5pt;
-    margin-left: 20px;
-    background: #75ea47;
+.saveButton:active{
+    background: #fff3b0;
 }
-#resultType{
-    margin-top: 5pt;
-    margin-left: 20px;
-    background-color: #ffe3d4;
+.select{
+    text-decoration: none;
+    border: none;
+    color: black;
+    width: 100px;
+    text-align:center;
+    font-weight: bold;
+    background: #f86dc2;
 }
 
-#my-stat[disabled], #best[disabled]{
-    background-color: #cccccc;
-    color: #3a3a3a;
+.select:active{
+    background: #f8cbe6;
 }

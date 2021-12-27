@@ -3,13 +3,19 @@ var glassId = $('#glassId').val();
 var parent = $('#' + glassId).parent();
 var glassHeight = parent.find('.height').text();
 var glassWidth = parent.find('.width').text();
-$('#' + glassId).css("color", "silver");
+$('#' + glassId).css("color", "#3a3a3a");
+$('#' + glassId).css("background-color", "#cccccc");
+$('#' + glassId).text('Выбран');
 
-    $('.add').on('click', function(){
+    $('.select').on('click', function(){
         $('#' + glassId).css("color", "black");
+        $('#' + glassId).css("background", "#f86dc2");
+        $('#' + glassId).text('Выбрать');
         glassId = $(this).attr('id');
         console.log(glassId);
-        $('#' + glassId).css("color", "silver");
+        $('#' + glassId).css("color", "#3a3a3a");
+        $('#' + glassId).css("background-color", "#cccccc");
+        $('#' + glassId).text('Выбран');
         parent = $('#' + glassId).parent();
         glassHeight = parent.find('.height').text();
         glassWidth = parent.find('.width').text();

@@ -7,6 +7,8 @@
     <link media="all" th:href="@{/css/statistic.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+
+    <a th:href="@{/main}"><div class="menu-item"></div></a>
     <input id="type" value="best" hidden>
     <button id="my-stat">Моя статистика</button>
     <button id="best" disabled>Лучшие игроки</button>
@@ -14,7 +16,6 @@
         <option selected value="1">По очкам</option>
         <option value="2">По времени</option>
     </select>
-    <a th:href="@{/main}"><div class="menu-item"></div></a>
     <table id="allStatistics" class="table">
         <thead>
         <tr>
