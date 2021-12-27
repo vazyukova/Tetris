@@ -4,7 +4,7 @@
 }
 
 html, body {
-    background-image: url("https://psv4.userapi.com/c236331/u231309478/docs/d53/b5c9cb59850d/IMG_3863.png?extra=SFYI64RUvzy-56mBK0cMNWYFXMCBdMu_q7jqvtifwjVfyWoWOJiCs_3D4lQWM0w4K_CvJMwBIa84VXdm7fB-BTUNR_RrI5QBNEmgzfHD2vJa0sMDy7nl3gew_k8AuRXwS1HE75ocGAeDf3-LZ480MKo");
+    background-image: url("https://cdn-ru0.puzzlegarage.com/img/puzzle/12/178_preview_r.v2.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -65,24 +65,21 @@ html, body {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-    background: rgba(25, 241, 208, 0.94);
+    background: rgb(255, 144, 3);
 }
 
 .logout_btn:active{
     background: #c9f3f1;
 }
 
-.about{
-    position: relative;
-}
 
 .menu-wrapper .aboutDev_btn, .menu-wrapper .aboutSyst_btn{
     color: black;
     padding: 5px;
     border: none;
     cursor: pointer;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     margin-bottom: 10px;
     font-size: 15px;
     font-weight: bold;
@@ -92,15 +89,17 @@ html, body {
     position: absolute;
     top:2px;
     right:60px;
+    border-radius: 20px;
     background-color: #6cd5ff;
     background-image: url("https://img.icons8.com/ios/50/000000/info--v1.png");
     background-repeat: no-repeat;
 }
 
-.menu-wrapper .aboutSyst_btn{
+.menu-wrapper  .aboutSyst_btn{
     position: absolute;
     top:2px;
     right:10px;
+    border-radius: 20px;
     background-color: #ff7dc9;
     background-image: url("https://img.icons8.com/ios/50/000000/help.png");
     background-repeat: no-repeat;
