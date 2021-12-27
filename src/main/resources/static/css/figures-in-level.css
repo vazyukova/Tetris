@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url(http://fonts.gstatic.com/s/roboto/v15/mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2);
+}
+
+html, body {
+    background-image: url("https://cdn-ru0.puzzlegarage.com/img/puzzle/12/178_preview_r.v2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #52d7be;
+    height: 100%;
+    margin: 0;
+    font-size: 15px;
+    font-family: Roboto;
+}
+.wrapper{
+    margin-top: 10pt;
+    width: 1080pt;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: white;
+}
+.figure{
+
+}
+.figure-list{
+
+}
+
+.wrapper .figure-list td{
+    border: 2px solid purple;
+    border-collapse: collapse;
+    cursor: default;
+    width: 10pt;
+    height: 10pt;
+}
+
+.menu-item{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    margin-top: 5pt;
+    border-radius: 10px;
+    background-image: url("https://img.icons8.com/ios/50/000000/home-page.png");
+    background-repeat: no-repeat;
+    background-color: #77dcff;
+}
+
+.saveButton{
+    text-decoration: none;
+    left: 10%;
+    border: none;
+    color: black;
+    padding: 15px 20px;
+    cursor: pointer;
+    width: 200px;
+    text-align:center;
+    font-weight: bold;
+    margin-top: 5pt;
+    margin-left: 100px;
+    background: #faff63;
+    font-size: 18pt;
+}
+
+.saveButton:active{
+    background: #fff7be;
+}
+
+h1{
+    font-size: 20pt;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    padding: 5pt;
+}
+
+

@@ -53,7 +53,7 @@ html, body {
 
 .figure-list{
     margin-top: 5pt;
-    width: 600pt;
+    width: 480pt;
     display: inline-block;
     position: relative;
     left: 50%;
@@ -96,7 +96,9 @@ option{
     text-align:center;
     font-weight: bold;
     background: #6dff63;
-    margin-left: 20pt;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
 #change{

@@ -15,7 +15,7 @@ $.ajax({
     success: function(data) {
         console.log(data);
         data.forEach(function (fig){
-            $('.figure-list').append('<div class="figure-div-'+ fig.id + '" style="display: inline-block; border: 2px solid purple; margin: 10pt;"></div>');
+            $('.figure-list').append('<div class="figure-div-'+ fig.id + '" style="display: inline-block; border: 2px solid purple; margin: 12pt;"></div>');
             $('.figure-div-' + fig.id).append('<table class="figure' + fig.id + '"></table>');
             var matrix = getMatrixFromStr(fig.matrix);
             for (var i = 0; i < 4; i++) {
