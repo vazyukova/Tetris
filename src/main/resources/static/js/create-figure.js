@@ -11,8 +11,8 @@ $('td').on('click', function () {
     var id = String($(this).attr('id'));
     var indexes = id.split('-');
     if (matrix[Number(indexes[0])][Number(indexes[1])] === 0) {
-        $(this).css("background-color", "red");
-        $(this).css("color", "red");
+        $(this).css("background-color", "#5723EEFF");
+        $(this).css("color", "#5723EEFF");
         matrix[Number(indexes[0])][Number(indexes[1])] = 1;
     }
     else
