@@ -5,13 +5,14 @@
         <title>Тетрис. Главное меню</title>
         <!--<link rel="stylesheet" href="../static/css/main.css"/>-->
         <link media="all" th:href="@{/css/main.css}" rel="stylesheet" type="text/css"/>
+        <link rel="import" th:href="@{/templates/info-system.html}" type="text/css"/>
     </head>
     <body>
         <input id="role" th:value="${role}" hidden>
         <div class="menu-wrapper">
 
                 <a class="aboutDev_btn" th:href="@{/info-students}"></a>
-                <a class="aboutSyst_btn" th:href="@{/info-system}"></a>
+                <a class="aboutSyst_btn"></a>
 
             <h1 th:inline="text">Игра «Тетрис»</h1>
             <div class="menu-items">

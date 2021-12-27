@@ -1,7 +1,6 @@
 // получаем доступ к холсту
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
-
 // размер квадратика
 const grid = 32;
 // массив с последовательностями фигур, на старте — пустой
@@ -25,15 +24,17 @@ for (let i = Number(level); i > -1; i--) {
         contentType: "application/json",
         url: '/api/figures/' + i,
         success: function (data) {
-            console.log(data);
+            let j = 0;
             data.forEach(function (fig) {
 
                 var matrix = getMatrixFromStr(fig.matrix);
                 var id = fig.id;
                 tetrominos.push({
-                    'name' : id,
-                    'matrix' : matrix
+                    'name' : String(id + 'F') ,
+                    'matrix' : matrix,
+                    'color' : colors[getRandomInt(0, 6)]
                 })
+                j++;
             });
 
         }, // обработка ответа от сервера
@@ -42,7 +43,6 @@ for (let i = Number(level); i > -1; i--) {
         },
         complete: function () {
             console.log('Завершение выполнения');
-            console.log(tetrominos);
             tetromino = getNextTetromino();
             //следующая фигура
             nextTetromino = getNextTetromino();
@@ -58,12 +58,35 @@ for (let i = Number(level); i > -1; i--) {
 // с помощью двумерного массива следим за тем, что находится в каждой клетке игрового поля
 // размер поля, и несколько строк ещё находится за видимой областью
 var playfield = [];
-var height = $('#height').val();
-var width = $('#width').val();
+
 var speed = $('#speed').val();
 $('#game').attr('height', 32 * height);
 $('#game').attr('width', 32 * width);
 $('#result').text(0);
+const bg = document.getElementById('gridBG');
+const contextbg = bg.getContext('2d');
+var height = $('#height').val();
+var width = $('#width').val();
+$('#game').attr('height', 32 * height);
+$('#game').attr('width', 32 * width);
+$('#gridBG').attr('height', 32 * height);
+$('#gridBG').attr('width', 32 * width);
+if ($('#grid').val() === '1') {
+    for (var x = grid; x < 32 * width; x += 32) {
+        contextbg.strokeStyle = "#888";
+        contextbg.moveTo(x, 0);
+        contextbg.lineTo(x, grid * height);
+        contextbg.stroke();
+    }
+
+    for (var y = grid; y < 32 * height; y += 32) {
+        contextbg.strokeStyle = "#888";
+        contextbg.moveTo(0, y);
+        contextbg.lineTo(grid * width, y);
+        contextbg.stroke();
+    }
+}
+
 // заполняем сразу массив пустыми ячейками
 for (let row = -2; row < height; row++) {
     playfield[row] = [];
@@ -150,15 +173,15 @@ function getMatrixFromStr(str){
 };*/
 
 // цвет каждой фигуры
-const colors = {
-    'I': 'cyan',
-    'O': 'yellow',
-    'T': 'purple',
-    'S': 'green',
-    'Z': 'red',
-    'J': 'blue',
-    'L': 'orange'
-};
+const colors = [
+    'cyan',
+    'yellow',
+    'purple',
+    'green',
+    'red',
+    'blue',
+    'orange'
+];
 
 // счётчик
 let count = 0;
@@ -186,7 +209,7 @@ function generateSequence() {
     // тут — сами фигуры
     const sequence = [];
     for (let i = 0; i < tetrominos.length; i++){
-        sequence.push(tetrominos[i].name);
+        sequence.push(String(tetrominos[i].name));
     }
 
     while (sequence.length) {
@@ -194,7 +217,7 @@ function generateSequence() {
         const rand = getRandomInt(0, sequence.length - 1);
         const name = sequence.splice(rand, 1)[0];
         // помещаем выбранную фигуру в игровой массив с последовательностями
-        tetrominoSequence.push(name);
+        tetrominoSequence.push(String(name));
     }
 }
 
@@ -205,9 +228,10 @@ function getNextTetromino() {
         generateSequence();
     }
     // берём первую фигуру из массива
-    const name = tetrominoSequence.pop();
+    const name = String(tetrominoSequence.pop());
     // сразу создаём матрицу, с которой мы отрисуем фигуру
-    const matrix = tetrominos.find(item => item.name === name).matrix;
+    const matrix = tetrominos.find(item => item.name === String(name)).matrix;
+    const color1 = tetrominos.find(item => item.name === String(name)).color;
 
     // I и O стартуют с середины, остальные — чуть левее
     const col = playfield[0].length / 2 - Math.ceil(matrix[0].length / 2);
@@ -220,21 +244,21 @@ function getNextTetromino() {
         name: name,      // название фигуры (L, O, и т.д.)
         matrix: matrix,  // матрица с фигурой
         row: row,        // текущая строка (фигуры стартую за видимой областью холста)
-        col: col         // текущий столбец
+        col: col,        // текущий столбец
+        color: color1
     };
 }
 
 //отрисовываем следующую фигуру
 function printNextFig(tetr){
     $('#nextFig tbody').empty();
-    console.log(tetr.name)
     for (var i = 0; i < tetr.matrix.length; i++) {
         $('#nextFig').append('<tr class="figure-tr' + i + '"></tr>');
         for (var j = 0; j < tetr.matrix.length; j++) {
             if (tetr.matrix[i][j] === 0) {
                 $('.figure-tr' + i).append('<td style="color:white">0000</td>');
             } else {
-                $('.figure-tr' + i).append('<td style="background-color:' + colors[tetr.name] + '; color:' + colors[tetr.name] +'">1111</td>');
+                $('.figure-tr' + i).append('<td style="background-color:' + tetr.color + '; color:' + tetr.color +'">1111</td>');
             }
         }
     }
@@ -285,7 +309,7 @@ function placeTetromino() {
                     return showGameOver();
                 }
                 // если всё в порядке, то записываем в массив игрового поля нашу фигуру
-                playfield[tetromino.row + row][tetromino.col + col] = tetromino.name;
+                playfield[tetromino.row + row][tetromino.col + col] = String(tetromino.name);
             }
         }
     }
@@ -311,7 +335,6 @@ function placeTetromino() {
     // получаем следующую фигуру
     tetromino = nextTetromino;
     nextTetromino = getNextTetromino();
-    console.log(nextTetromino);
     printNextFig(nextTetromino);
 }
 
@@ -350,7 +373,7 @@ $('.saveButton').on('click', function (event) {
         url: '/api/saveResults',
         data: JSON.stringify({"result": results, "time": time}),
         success: function(data) { console.log(data); }, // обработка ответа от сервера
-        error: function(jqXHR) { console.log('Ошибка выполнения'); },
+        error: function(jqXHR) { alert('Ошибка выполнения'); },
         complete: function() { console.log('Завершение выполнения'); }
     });
     document.location.href = '/statistic'
@@ -362,29 +385,12 @@ function loop() {
     rAF = requestAnimationFrame(loop);
     // очищаем холст
     context.clearRect(0,0,canvas.width, canvas.height);
-    //рисуем сетку
-    if ($('#grid').val() === '1') {
-        for (var x = grid; x < canvas.width; x += 32) {
-            context.strokeStyle = "#888";
-            context.moveTo(x, 0);
-            context.lineTo(x, grid * height);
-            context.stroke();
-        }
-
-        for (var y = grid; y < canvas.height; y += 32) {
-            context.strokeStyle = "#888";
-            context.moveTo(0, y);
-            context.lineTo(grid * width, y);
-            context.stroke();
-        }
-    }
     // рисуем игровое поле с учётом заполненных фигур
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
             if (playfield[row][col]) {
-                const name = playfield[row][col];
-                context.fillStyle = colors[name];
-
+                const name = String(playfield[row][col]);
+                context.fillStyle = tetrominos.find(item => item.name === String(name)).color;
                 // рисуем всё на один пиксель меньше, чтобы получился эффект «в клетку»
                 context.fillRect(col * grid, row * grid, grid-1, grid-1);
             }
@@ -407,7 +413,7 @@ function loop() {
         }
 
         // не забываем про цвет текущей фигуры
-        context.fillStyle = colors[tetromino.name];
+        context.fillStyle = tetromino.color;
 
         // отрисовываем её
         for (let row = 0; row < tetromino.matrix.length; row++) {
