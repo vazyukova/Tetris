@@ -6,7 +6,7 @@ $.ajax({
     success: function(data) {
         console.log(data);
         data.forEach(function (fig){
-            $('.figure-list').append('<div class="figure-div-'+ fig.id + '" style="display: inline-block; border: 2px solid #254141; margin: 10pt"></div>');
+            $('.figure-list').append('<div class="figure-div-'+ fig.id + '" style="display: inline-block; border: 2px solid purple; margin: 10pt"></div>');
             $('.figure-div-' + fig.id).append('<table class="figure' + fig.id + '" ></table>');
             var matrix = getMatrixFromStr(fig.matrix);
             for (var i = 0; i < 4; i++) {
@@ -15,13 +15,13 @@ $.ajax({
                     if (matrix[i][j] === '0') {
                         $('.figure-' + i + '-' + fig.id ).append('<td style="color:white">000</td>');
                     } else {
-                        $('.figure-' + i + '-' + fig.id ).append('<td style="background-color: red; color: red">111</td>');
+                        $('.figure-' + i + '-' + fig.id ).append('<td style="background-color: #5723EEFF; color: #5723EEFF">111</td>');
                     }
                 }
             }
             if (!contains(tetraminosIds, fig.id)) {
                 $('.figure-div-' + fig.id).append('<button class="deleteLink" id="delete-' + fig.id + '"></button>');
-                $('.figure-div-' + fig.id).append('<button class="editLink" id="edit-' + fig.id + '">Ред</button>');
+                $('.figure-div-' + fig.id).append('<button class="editLink" id="edit-' + fig.id + '"></button>');
                 $('#delete-' + fig.id).on('click', function () {
                     $.ajax({
                         type: 'GET',
