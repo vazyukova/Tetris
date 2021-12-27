@@ -21,8 +21,8 @@ $.ajax({
             for (let j = 0; j < 4; j++){
                 console.log($('#' + i + '-' + j));
                 if (matrix[i][j] === '1'){
-                    $('#' + i + '-' + j).css("background-color", "red");
-                    $('#' + i + '-' + j).css("color", "red");
+                    $('#' + i + '-' + j).css("background-color", "#5723EEFF");
+                    $('#' + i + '-' + j).css("color", "#5723EEFF");
                 }
             }
         }
@@ -35,8 +35,8 @@ $('td').on('click', function () {
     var indexes = id.split('-');
     console.log(indexes);
     if (Number(matrix[Number(indexes[0])][Number(indexes[1])]) === 0) {
-        $(this).css("background-color", "red");
-        $(this).css("color", "red");
+        $(this).css("background-color", "#5723EEFF");
+        $(this).css("color", "#5723EEFF");
         matrix[Number(indexes[0])][Number(indexes[1])] = 1;
     }
     else
