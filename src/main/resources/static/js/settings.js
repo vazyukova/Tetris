@@ -41,5 +41,7 @@ $('#saveButton').on('click', function(){
         error: function (jqXHR) {
             alert('Ошибка сервера');
         }
-    });
+    }).fail(function() {
+        alert("Разорвано соединение с сервером")
+    });;
 })

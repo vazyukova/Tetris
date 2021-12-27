@@ -156,7 +156,8 @@ public class REST {
         Level level = levelService.getById(levelId).get();
         Figure figure = figureService.findById(id);
         figure.setLevel(level);
-        Figure savedFigure = figureService.save(figure);
+        figure.setId(id);
+        Figure savedFigure = figureService.edit(figure);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .buildAndExpand(savedFigure.getId())
                 .toUri();

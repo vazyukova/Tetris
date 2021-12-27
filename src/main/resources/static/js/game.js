@@ -9,8 +9,50 @@ var tetrominoSequence = [];
 var nowDate = new Date();
 var time;
 var t = 0;
+let tetromino;
+let nextTetromino;
+let rAF;
+let gameOver;
 
 var results = 0;
+
+//загружаем фигуры по уровню сложности
+let tetrominos = [];
+//for (let i = level; i > -1; i--) {
+    $.ajax({
+        type: 'GET',
+        contentType: "application/json",
+        url: '/api/figures/1',
+        success: function (data) {
+            console.log(data);
+            data.forEach(function (fig) {
+
+                var matrix = getMatrixFromStr(fig.matrix);
+                var id = fig.id;
+                tetrominos.push({
+                    'name' : id,
+                    'matrix' : matrix
+                })
+            });
+
+        }, // обработка ответа от сервера
+        error: function (jqXHR) {
+            alert('Ошибка выполнения');
+        },
+        complete: function () {
+            console.log('Завершение выполнения');
+            console.log(tetrominos);
+            tetromino = getNextTetromino();
+            //следующая фигура
+            nextTetromino = getNextTetromino();
+            printNextFig(nextTetromino)
+            // следим за кадрами анимации, чтобы если что — остановить игру
+            rAF = null;
+            // флаг конца игры, на старте — неактивный
+            gameOver = false;
+        }
+    });
+//}
 
 // с помощью двумерного массива следим за тем, что находится в каждой клетке игрового поля
 // размер поля, и несколько строк ещё находится за видимой областью
@@ -18,6 +60,7 @@ var playfield = [];
 var height = $('#height').val();
 var width = $('#width').val();
 var speed = $('#speed').val();
+var level = $('#levelId')
 $('#game').attr('height', 32 * height);
 $('#game').attr('width', 32 * width);
 $('#result').text(0);
@@ -30,35 +73,45 @@ for (let row = -2; row < height; row++) {
     }
 }
 
-for (var x = grid; x < grid * width; x += 32) {
-    context.strokeStyle = "#888";
-    context.moveTo(x, 0);
-    context.lineTo(x, grid * width);
-    context.stroke();
-}
-
-for (var y = grid; y < grid * height; y += 32) {
-    context.strokeStyle = "#888";
-    context.moveTo(0, y);
-    context.lineTo(grid * height, y);
-    context.stroke();
-}
-
 if ($('#stat').val() === '1') {
-    $('#result').prop('hidden', true);
-    setInterval(setTimer, 1000);
+    $('#time').prop('hidden', true);
 }
 else if ($('#stat').val() === '2'){
-    $('#time').prop('hidden', true);
+    $('#result').prop('hidden', true);
+    setInterval(setTimer, 1000);
 }
 else{
     $('#result').prop('hidden', true);
     $('#time').prop('hidden', true);
 }
 
-// как рисовать каждую фигуру
-// https://tetris.fandom.com/wiki/SRS
-let tetrominos = {
+function getMatrixFromStr(str){
+    var matrix = [];
+    for (let row = 0; row < 4; row++) {
+        matrix[row] = [];
+        for (let col = 0; col < 4; col++) {
+            matrix[row][col] = 0;
+        }
+    }
+    let rows = str.split('|', 4);
+    let i = 0;
+    rows.forEach (row => {
+        if (row) {
+            let j = 0;
+            let columns = row.split(',');
+            columns.forEach(column => {
+                if (column) {
+                    matrix[i][j] = Number(column);
+                }
+                j++;
+            })
+        }
+        i++;
+    })
+    return matrix;
+}
+
+/*let tetrominos = {
     'I': [
         [0,0,0,0],
         [1,1,1,1],
@@ -94,7 +147,7 @@ let tetrominos = {
         [1,1,1],
         [0,0,0],
     ]
-};
+};*/
 
 // цвет каждой фигуры
 const colors = {
@@ -110,14 +163,7 @@ const colors = {
 // счётчик
 let count = 0;
 // текущая фигура в игре
-let tetromino = getNextTetromino();
-//следующая фигура
-let nextTetromino = getNextTetromino();
-printNextFig(nextTetromino)
-// следим за кадрами анимации, чтобы если что — остановить игру
-let rAF = null;
-// флаг конца игры, на старте — неактивный
-let gameOver = false;
+
 
 function setTimer(){
     t++;
@@ -138,7 +184,10 @@ function getRandomInt(min, max) {
 //https://tetris.fandom.com/wiki/Random_Generator
 function generateSequence() {
     // тут — сами фигуры
-    const sequence = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
+    const sequence = [];
+    for (let i = 0; i < tetrominos.length; i++){
+        sequence.push(tetrominos[i].name);
+    }
 
     while (sequence.length) {
         // случайным образом находим любую из них
@@ -158,13 +207,13 @@ function getNextTetromino() {
     // берём первую фигуру из массива
     const name = tetrominoSequence.pop();
     // сразу создаём матрицу, с которой мы отрисуем фигуру
-    const matrix = tetrominos[name];
+    const matrix = tetrominos.find(item => item.name === name).matrix;
 
     // I и O стартуют с середины, остальные — чуть левее
     const col = playfield[0].length / 2 - Math.ceil(matrix[0].length / 2);
 
     // I начинает с 21 строки (смещение -1), а все остальные — со строки 22 (смещение -2)
-    const row = name === 'I' ? -1 : -2;
+    const row = -2;
 
     // вот что возвращает функция
     return {
@@ -276,7 +325,7 @@ function showGameOver() {
     time = endDate.getTime() - nowDate.getTime();
     if ($('#stat').val() !== '0') {
         $('.modal').addClass('active');
-        if ($('#stat').val() === '2') {
+        if ($('#stat').val() === '1') {
             $('.results').append(results);
             $('#timeLabel').prop('hidden', true);
         }
@@ -292,7 +341,7 @@ function showGameOver() {
 
 $('.saveButton').on('click', function (event) {
     event.preventDefault();
-    if ($('#stat').val() === '1')
+    if ($('#stat').val() === '2')
         results = -1;
     else
         time = 0;
@@ -313,8 +362,23 @@ function loop() {
     // начинаем анимацию
     rAF = requestAnimationFrame(loop);
     // очищаем холст
-    context.clearRect(0,0,canvas.width,canvas.height);
+    context.clearRect(0,0,canvas.width, canvas.height);
+    //рисуем сетку
+    if ($('#grid').val() === '1') {
+        for (var x = grid; x < canvas.width; x += 32) {
+            context.strokeStyle = "#888";
+            context.moveTo(x, 0);
+            context.lineTo(x, grid * height);
+            context.stroke();
+        }
 
+        for (var y = grid; y < canvas.height; y += 32) {
+            context.strokeStyle = "#888";
+            context.moveTo(0, y);
+            context.lineTo(grid * width, y);
+            context.stroke();
+        }
+    }
     // рисуем игровое поле с учётом заполненных фигур
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
@@ -331,7 +395,7 @@ function loop() {
     // рисуем текущую фигуру
     if (tetromino) {
         // фигура сдвигается вниз каждые 35 кадров
-        if (++count > 52 / (speed * speed * speed)) {
+        if (++count > 64 / (speed * speed)) {
             tetromino.row++;
 
             count = 0;

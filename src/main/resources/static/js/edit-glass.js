@@ -28,7 +28,9 @@ $("#saveButton").on("click", function(){
                     alert("Такой стакан уже существует");
                 }
             }
-        });
+        }).fail(function() {
+            alert("Разорвано соединение с сервером")
+        });;
         location.reload();
     }
 });

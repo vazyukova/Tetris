@@ -58,5 +58,7 @@ function getStatistics(){
                 }
             })
         }
-    })
+    }).fail(function() {
+        alert("Разорвано соединение с сервером")
+    });
 }

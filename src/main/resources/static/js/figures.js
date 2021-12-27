@@ -41,7 +41,9 @@ $.ajax({
     }, // обработка ответа от сервера
     error: function(jqXHR) { console.log('Ошибка выполнения'); },
     complete: function() { console.log('Завершение выполнения'); }
-});
+}).fail(function() {
+    alert("Разорвано соединение с сервером")
+});;
 
 function getMatrixFromStr(str){
     var matrix = [];

@@ -39,6 +39,10 @@ public class FigureService {
         return figureRepository.save(figure);
     }
 
+    public Figure edit(Figure figure){
+        return figureRepository.save(figure);
+    }
+
     public Figure findById(int id){
         return figureRepository.findById(id);
     }

@@ -48,7 +48,9 @@ $('.save').on('click', function () {
                     alert('Нарушена целостность фигуры');
                 }
             }
-        });
+        }).fail(function() {
+            alert("Разорвано соединение с сервером")
+        });;
 });
 
 /*function check(matrix){

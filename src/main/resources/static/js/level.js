@@ -36,13 +36,17 @@ $.ajax({
                     success: function (){
                         location.reload();
                     }
-                })
+                }).fail(function() {
+                    alert("Разорвано соединение с сервером")
+                });
             });
         });
 
     }, // обработка ответа от сервера
     error: function(jqXHR) { console.log('Ошибка выполнения'); },
     complete: function() { console.log('Завершение выполнения'); }
+}).fail(function(){
+    alert("Разорвано соединение с сервером");
 });
 
 $('.saveLevel').on('click', function (){
@@ -54,7 +58,9 @@ $('.saveLevel').on('click', function (){
         success: function (){
             location.href = '/main';
         }
-    })
+    }).fail(function() {
+        alert("Разорвано соединение с сервером")
+    });
 });
 
 function getMatrixFromStr(str){

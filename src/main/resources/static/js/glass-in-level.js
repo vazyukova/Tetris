@@ -25,5 +25,7 @@ $('#' + glassId).css("color", "silver");
             success: function(data) { document.location.href = "/level/" + levelId}, // обработка ответа от сервера
             error: function(jqXHR) { console.log('Ошибка выполнения'); },
             complete: function() { console.log('Завершение выполнения'); }
-        });
+        }).fail(function() {
+            alert("Разорвано соединение с сервером")
+        });;
     })
