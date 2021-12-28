@@ -45,6 +45,7 @@ function getStatistics(){
         success: function (data) {
             $('#allStatistics tbody').remove();
             data.forEach(function (stat){
+                console.log(stat.result + " " + stat.time)
                 if (stat.result === -1 || stat.time === '0:0') {
                     console.log();
                 }

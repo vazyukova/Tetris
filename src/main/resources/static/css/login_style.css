@@ -12,7 +12,7 @@ html, body {
     background-color: #52d7be;
     height: 100%;
     margin: 0;
-    font-size: 15px;
+    font-size: 14px;
     font-family: Roboto;
 }
 body {
@@ -22,10 +22,9 @@ body {
 }
 
 p{
-    font-size: 15pt;
     font-weight: bold;
     text-align:center;
-    font-size: 16pt;
+    font-size: 15pt;
 }
 
 .error{
@@ -53,7 +52,7 @@ p{
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-    font-size: 16pt;
+    font-size: 15pt;
 }
 
 .form-container {
@@ -79,7 +78,7 @@ p{
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-    font-size: 16pt;
+    font-size: 14pt;
 }
 
 .form-container input[type=text]:focus, .form-container input[type=password]:focus {
@@ -102,7 +101,7 @@ p{
     left: 50%;
     transform: translate(-50%, 0);
     background: #1af1d0;
-    font-size: 16pt;
+    font-size: 15pt;
 }
 
 .form-container .submit_btn:active{

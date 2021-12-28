@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface FigureRepository extends JpaRepository<Figure, Integer> {
+    List<Figure> findAllByOrderByLevel();
     List<Figure> findByMatrix(String matrix);
     Figure findById(int id);
     List<Figure> findByLevel(Level level);

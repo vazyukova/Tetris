@@ -33,7 +33,7 @@ public class StatisticService {
     }
 
     public List<Statistic> findByUserOrderByTime(Usr user){
-        return statisticRepository.findByUserOrderByTime(user);
+        return statisticRepository.findByUserOrderByTimeDesc(user);
     }
 
     public List<Statistic> findBestByResult(){
@@ -41,6 +41,6 @@ public class StatisticService {
     }
 
     public List<Statistic> findBestByTime(){
-        return statisticRepository.findFirst10ByOrderByTime();
+        return statisticRepository.findFirst10ByOrderByTimeDesc();
     }
 }

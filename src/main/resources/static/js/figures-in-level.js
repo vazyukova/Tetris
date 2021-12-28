@@ -1,6 +1,7 @@
 var levelId = $('#levelId').val();
 var figures = [];
 var firstFigures = [];
+var countOfFigs = 0;
 let tetraminosIds = [55, 56, 57, 58, 59, 60, 61, 62, 63];
 
 $.ajax({
@@ -24,6 +25,7 @@ $.ajax({
                 $('.figure-div-' + fig.id).append('<button class="addButton" id="' + fig.id + '"style="border: none; background-color: #3bd9d9; color: black; margin: 2pt;">Добавить</button>');
                 if (fig.level !== null) {
                     if (fig.level.id === Number(levelId)) {
+                        countOfFigs++;
                         $('#' + fig.id).text('Удалить');
                         $('#' + fig.id).css("background-color", "#ffac3f");
                         firstFigures.splice(figures.length, 0, fig.id);
@@ -45,6 +47,7 @@ $.ajax({
 
                 $('#' + fig.id).on('click', function () {
                     if ($(this).text() === 'Удалить') {
+                        countOfFigs--;
                         //figures.splice(l, 1);
                         figures = jQuery.grep(figures, function (value) {
                             return value !== fig.id;
@@ -70,6 +73,7 @@ $.ajax({
                         $('#' + fig.id).css("background-color", "#3bd9d9");
                         console.log(figures);
                     } else {
+                        countOfFigs++;
                         figures.splice(figures.length, 0, fig.id);
                         $.ajax({
                             type: 'POST',
@@ -106,34 +110,11 @@ $.ajax({
 });;
 
 $('.saveButton').on('click', function (){
-    /*figures.forEach(function (item) {
-        let lev;
-        console.log(firstFigures);
-        console.log(figures);
-        if (firstFigures.indexOf(item.id) !== -1 && figures.indexOf(item.id) === -1){
-            lev = 0;
-        }else {
-            lev = levelId
-        }
-            $.ajax({
-                type: 'POST',
-                url: '/api/setFigureLevel/' + item,
-                contentType: "application/json",
-                data: JSON.stringify(lev),
-                success: function (data) {
-                    //document.location.href = "/level/" + levelId
-                }, // обработка ответа от сервера
-                error: function (jqXHR) {
-                    console.log('Ошибка выполнения');
-                },
-                complete: function () {
-                    console.log('Завершение выполнения');
-                }
-            }).fail(function(){
-                alert("Разорвано соединение с сервером");
-            });
-        })*/
-    document.location.href = "/level/" + levelId;
+    if (countOfFigs > 2) {
+        document.location.href = "/level/" + levelId;
+    }else{
+        alert("Минимальное количество фигур на уровне - 3");
+    }
 });
 
 function getMatrixFromStr(str){

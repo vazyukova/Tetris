@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class StatisticController {
@@ -21,6 +22,7 @@ public class StatisticController {
     public String getRegistrationPage(Model model)
     {
         List<Statistic> statistics = statisticService.findBestByResult();
+        statistics = statistics.stream().filter(item -> item.getResult() != -1).collect(Collectors.toList());
         model.addAttribute("statistics", statistics);
         return "statistic";
     }

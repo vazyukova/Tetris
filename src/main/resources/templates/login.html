@@ -26,5 +26,17 @@
             <input type="submit" value="Вход" th:class="submit_btn"/>
         </form>
 </div>
+<script type="text/javascript"
+        src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+    $('.submit_btn').on('click', function (){
+        if ($('#username').val().length < 3 || $('#username').val().length > 9){
+            alert('Длина логина должна быть от 4 до 8');
+        }
+        if ($('#password').val().length < 3 || $('#username').val().length > 11){
+            alert('Длина пароля должна быть от 4 до 10');
+        }
+    })
+</script>
 </body>
 </html>

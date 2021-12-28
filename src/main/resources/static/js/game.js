@@ -59,6 +59,7 @@ for (let i = Number(level); i > -1; i--) {
 var playfield = [];
 
 var speed = $('#speed').val();
+speed = Number(speed) / 2;
 $('#game').attr('height', 32 * height);
 $('#game').attr('width', 32 * width);
 $('#result').text(0);
@@ -197,7 +198,7 @@ function setTimer(){
     minutes = minutes < 10 ? '0' + minutes : minutes;
     let sec = t % 60;
     sec = sec < 10 ? '0' + sec : sec;
-    $('#time').text(Math.floor(t / 60) + ":" + t % 60);
+    $('#time').text(minutes + ":" + sec);
 }
 function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -254,16 +255,20 @@ function getNextTetromino() {
 
 //отрисовываем следующую фигуру
 function printNextFig(tetr){
-    $('#nextFig tbody').empty();
-    for (var i = 0; i < tetr.matrix.length; i++) {
-        $('#nextFig').append('<tr class="figure-tr' + i + '"></tr>');
-        for (var j = 0; j < tetr.matrix.length; j++) {
-            if (tetr.matrix[i][j] === 0) {
-                $('.figure-tr' + i).append('<td style="color:white; width: 23pt; height: 23pt;">0000</td>');
-            } else {
-                $('.figure-tr' + i).append('<td style="width: 23pt; height: 23pt;background-color:' + tetr.color + '; color:' + tetr.color +'">1111</td>');
+    if ($('#next').val() === '1') {
+        $('#nextFig tbody').empty();
+        for (var i = 0; i < tetr.matrix.length; i++) {
+            $('#nextFig').append('<tr class="figure-tr' + i + '"></tr>');
+            for (var j = 0; j < tetr.matrix.length; j++) {
+                if (tetr.matrix[i][j] === 0) {
+                    $('.figure-tr' + i).append('<td style="color:white; width: 23pt; height: 23pt;">0000</td>');
+                } else {
+                    $('.figure-tr' + i).append('<td style="width: 23pt; height: 23pt;background-color:' + tetr.color + '; color:' + tetr.color + '">1111</td>');
+                }
             }
         }
+    }else{
+        $('#nextFig').prop('hidden', true);
     }
 }
 
@@ -321,7 +326,12 @@ function placeTetromino() {
     for (let row = playfield.length - 1; row >= 0; ) {
         // если ряд заполнен
         if (playfield[row].every(cell => !!cell)) {
-            results += 10;
+            if(level === '1')
+                results += 10;
+            else if(level.val() === '2')
+                results += 15;
+            else
+                results += 20;
             $('#result').text(results);
             // очищаем его и опускаем всё вниз на одну клетку
             for (let r = row; r >= 0; r--) {
@@ -356,15 +366,24 @@ function showGameOver() {
     }
     else if ($('#stat').val() === '2') {
         $('#resLabel').prop('hidden', true);
-        $('.time').append(Math.floor(time / 60000) + ":" + Math.floor((time % 60000) / 1000));
+        let minutes = Math.floor(time / 60000);
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        let secs = Math.floor((time % 60000) / 1000);
+        secs = secs < 10 ? '0' + secs : secs;
+        $('.time').append(minutes + ":" + secs);
     }
     else{
         $('#timeLabel').prop('hidden', true);
         $('#resLabel').prop('hidden', true);
+        $('#yes').prop('hidden', true);
+        $('#no').text('Хорошо');
+        $('#no').css('width', '78px');
+        $('.par').css('align-items', 'center');
+        $('.par').css('justify-content', 'center');
     }
 }
 
-$('.saveButton').on('click', function (event) {
+$('#yes').on('click', function (event) {
     event.preventDefault();
     if ($('#stat').val() === '2')
         results = -1;
@@ -376,7 +395,6 @@ $('.saveButton').on('click', function (event) {
         url: '/api/saveResults',
         data: JSON.stringify({"result": results, "time": time}),
         success: function(data) { console.log(data); }, // обработка ответа от сервера
-        error: function(jqXHR) { alert('Ошибка выполнения'); },
         complete: function() { console.log('Завершение выполнения'); }
     });
     document.location.href = '/statistic'
@@ -403,7 +421,9 @@ function loop() {
     // рисуем текущую фигуру
     if (tetromino) {
         // фигура сдвигается вниз каждые 35 кадров
-        if (++count > 64 / (speed * speed)) {
+
+        console.log(speed);
+        if (++count > 40 / (2 * speed)) {
             tetromino.row++;
 
             count = 0;

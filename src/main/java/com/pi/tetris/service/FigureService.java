@@ -22,7 +22,7 @@ public class FigureService {
     }
 
     public List<Figure> findAll(){
-        return figureRepository.findAll();
+        return figureRepository.findAllByOrderByLevel();
     }
 
     public List<Figure> findByMatrix(String matrix){

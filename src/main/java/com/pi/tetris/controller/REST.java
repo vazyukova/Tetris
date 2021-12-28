@@ -94,6 +94,7 @@ public class REST {
         if (myStatistics == null) {
             return ResponseEntity.notFound().build();
         } else {
+            myStatistics = myStatistics.stream().filter(item -> !item.getTime().equals("0:0")).collect(Collectors.toList());
             return new ResponseEntity<>(myStatistics, HttpStatus.OK);
         }
     }
@@ -106,6 +107,7 @@ public class REST {
         if (myStatistics == null) {
             return ResponseEntity.notFound().build();
         } else {
+            myStatistics = myStatistics.stream().filter(item -> item.getResult() != -1).collect(Collectors.toList());
             return new ResponseEntity<>(myStatistics, HttpStatus.OK);
         }
     }
@@ -116,6 +118,7 @@ public class REST {
         if (myStatistics == null) {
             return ResponseEntity.notFound().build();
         } else {
+            myStatistics = myStatistics.stream().filter(item -> !item.getTime().equals("0:0")).collect(Collectors.toList());
             return new ResponseEntity<>(myStatistics, HttpStatus.OK);
         }
     }
@@ -126,6 +129,7 @@ public class REST {
         if (myStatistics == null) {
             return ResponseEntity.notFound().build();
         } else {
+            myStatistics = myStatistics.stream().filter(item -> item.getResult() != -1).collect(Collectors.toList());
             return new ResponseEntity<>(myStatistics, HttpStatus.OK);
         }
     }
