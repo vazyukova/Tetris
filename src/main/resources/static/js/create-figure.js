@@ -23,7 +23,7 @@ $('td').on('click', function () {
     }
 })
 
-$('.save').on('click', function () {
+$('#save').on('click', function () {
         for (var i = 0; i < 4; i++) {
             for (var j = 0; j < 4; j++) {
                 matrixStr += matrix[i][j] + ",";
@@ -48,8 +48,6 @@ $('.save').on('click', function () {
                     alert('Нарушена целостность фигуры');
                 }
             }
-        }).fail(function() {
-            alert("Разорвано соединение с сервером")
         });
 });
 

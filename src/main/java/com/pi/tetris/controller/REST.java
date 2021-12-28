@@ -47,7 +47,7 @@ public class REST {
 
     @PostMapping(value = "/saveFigure", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Figure> saveResults(@RequestBody Figure figure) {
-        figure.setLevel(figure.getLevel() == null ? levelService.getById(0).get() : figure.getLevel());
+        //figure.setLevel(figure.getLevel() == null ? levelService.getById(0).get() : figure.getLevel());
         Figure figureSaved = figureService.save(figure);
         if (figureSaved == null){
             return ResponseEntity.status(422).build();

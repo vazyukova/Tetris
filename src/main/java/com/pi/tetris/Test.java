@@ -16,9 +16,8 @@ public class Test {
     }
     public static void main(String[] args) {
 
-        int[][] matrix = {{1, 0, 0, 0}, {1, 1, 0, 0}, {1, 0, 0, 0}};
-        int [][] m1 = rotate(matrix);
-        rotate(m1);
+        int[][] matrix = {{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}};
+        check(matrix);
     }
 
     private static int[][] rotate(int[][] matrix){
@@ -46,24 +45,24 @@ public class Test {
                 for (Coord current : currentList) {
                     flag = false;
                     if (current.i != 0 && matrix[current.i - 1][current.j] == 1 && !contains(checked, current.i - 1, current.j)) {
-                        current = new Coord(current.i - 1, current.j);
-                        cc.add(current);
-                        checked.add(current);
+                        Coord current1 = new Coord(current.i - 1, current.j);
+                        cc.add(current1);
+                        checked.add(current1);
                         flag = true;
                     } if (current.i != 3 && matrix[current.i + 1][current.j] == 1 && !contains(checked, current.i + 1, current.j)) {
-                        current = new Coord(current.i + 1, current.j);
-                        cc.add(current);
-                        checked.add(current);
+                        Coord current1 = new Coord(current.i + 1, current.j);
+                        cc.add(current1);
+                        checked.add(current1);
                         flag = true;
                     } if (current.j != 0 && matrix[current.i][current.j - 1] == 1 && !contains(checked, current.i, current.j - 1)) {
-                        current = new Coord(current.i, current.j - 1);
-                        cc.add(current);
-                        checked.add(current);
+                        Coord current1 = new Coord(current.i, current.j - 1);
+                        cc.add(current1);
+                        checked.add(current1);
                         flag = true;
                     } if (current.j != 3 && matrix[current.i][current.j + 1] == 1 && !contains(checked, current.i, current.j + 1)) {
-                        current = new Coord(current.i, current.j + 1);
-                        checked.add(current);
-                        cc.add(current);
+                        Coord current1 = new Coord(current.i, current.j + 1);
+                        checked.add(current1);
+                        cc.add(current1);
                         flag = true;
                     } if(!flag) {
                         return false;

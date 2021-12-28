@@ -8,6 +8,7 @@
         <link rel="import" th:href="@{/templates/info-system.html}" type="text/css"/>
     </head>
     <body>
+    <div class="main-content">
         <input id="role" th:value="${role}" hidden>
         <div class="menu-wrapper">
 
@@ -48,8 +49,23 @@
             </br>
         </div>
         <div class="overlay" id="overlay-modal"></div>
+    </div>
+    <div class="syst" hidden></div>
+    <div class="dev" hidden></div>
         <script type="text/javascript"
                 src="https://code.jquery.com/jquery-1.11.1.js"></script>
         <script type="text/javascript" th:src="@{/js/main.js}"></script>
+        <script>
+                $('.syst').load("/info-system");
+                $('.dev').load("/info-students");
+                $('.aboutDev_btn').on('click', function(){
+                    $('.main-content').prop('hidden', true);
+                    $('.dev').prop('hidden', false);
+                })
+                $('.aboutSyst_btn').on('click', function(){
+                    $('.main-content').prop('hidden', true);
+                    $('.syst').prop('hidden', false);
+                })
+        </script>
     </body>
 </html>

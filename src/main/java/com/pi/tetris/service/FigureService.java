@@ -30,8 +30,11 @@ public class FigureService {
     }
 
     public Figure save(Figure figure){
+        System.out.println(figure.getMatrix());
         List<Figure> duplicateFigures = findByMatrix(figure.getMatrix());
-        if (!check(getMatrixFromString(figure.getMatrix()))){
+        boolean ch = check(getMatrixFromString(figure.getMatrix()));
+        System.out.println(ch);
+        if (!ch){
             return new Figure();
         }
         if (!duplicateFigures.isEmpty() || !checkDuplicates(figure))
@@ -174,42 +177,44 @@ public class FigureService {
         checked.add(c);
         boolean flag = false;
         while(true) {
+            currentList.forEach(item -> System.out.print(item.i + " " + item.j));
+            System.out.println();
             if (!checkFill(matrix, checked)){
                 return true;
             }
             else {
                 List<Coord> cc = new ArrayList<>();
+                flag = false;
                 for (Coord current : currentList) {
-                    flag = false;
                     if (current.i != 0 && matrix[current.i - 1][current.j] == 1 && !contains(checked, current.i - 1, current.j)) {
-                        current = new Coord(current.i - 1, current.j);
-                        cc.add(current);
-                        checked.add(current);
+                        Coord current1 = new Coord(current.i - 1, current.j);
+                        cc.add(current1);
+                        checked.add(current1);
                         flag = true;
                     } if (current.i != 3 && matrix[current.i + 1][current.j] == 1 && !contains(checked, current.i + 1, current.j)) {
-                        current = new Coord(current.i + 1, current.j);
-                        cc.add(current);
-                        checked.add(current);
+                        Coord current1 = new Coord(current.i + 1, current.j);
+                        cc.add(current1);
+                        checked.add(current1);
                         flag = true;
                     } if (current.j != 0 && matrix[current.i][current.j - 1] == 1 && !contains(checked, current.i, current.j - 1)) {
-                        current = new Coord(current.i, current.j - 1);
-                        cc.add(current);
-                        checked.add(current);
+                        Coord current1 = new Coord(current.i, current.j - 1);
+                        cc.add(current1);
+                        checked.add(current1);
                         flag = true;
                     } if (current.j != 3 && matrix[current.i][current.j + 1] == 1 && !contains(checked, current.i, current.j + 1)) {
-                        current = new Coord(current.i, current.j + 1);
-                        checked.add(current);
-                        cc.add(current);
+                        Coord current1 = new Coord(current.i, current.j + 1);
+                        checked.add(current1);
+                        cc.add(current1);
                         flag = true;
-                    } if(!flag && !contains(checked, current.i, current.j)) {
-                        return false;
                     }
                 }
-                cc.forEach(System.out :: println);
+                if(!flag && checkFill(matrix, checked)) {
+                    return false;
+                }
                 currentList = cc;
             }
-            }
         }
+    }
 
     public static boolean checkFill(int[][] matrix, List<Coord>checked){
         for (int i = 0; i < 4; i++){
