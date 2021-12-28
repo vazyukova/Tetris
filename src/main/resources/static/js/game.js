@@ -26,7 +26,6 @@ for (let i = Number(level); i > -1; i--) {
         success: function (data) {
             let j = 0;
             data.forEach(function (fig) {
-
                 var matrix = getMatrixFromStr(fig.matrix);
                 var id = fig.id;
                 tetrominos.push({
@@ -98,14 +97,18 @@ for (let row = -2; row < height; row++) {
 
 if ($('#stat').val() === '1') {
     $('#time').prop('hidden', true);
+    $('#l-time').prop('hidden', true);
 }
 else if ($('#stat').val() === '2'){
     $('#result').prop('hidden', true);
+    $('#l-result').prop('hidden', true);
     setInterval(setTimer, 1000);
 }
 else{
     $('#result').prop('hidden', true);
+    $('#l-result').prop('hidden', true);
     $('#time').prop('hidden', true);
+    $('#l-time').prop('hidden', true);
 }
 
 function getMatrixFromStr(str){
@@ -256,9 +259,9 @@ function printNextFig(tetr){
         $('#nextFig').append('<tr class="figure-tr' + i + '"></tr>');
         for (var j = 0; j < tetr.matrix.length; j++) {
             if (tetr.matrix[i][j] === 0) {
-                $('.figure-tr' + i).append('<td style="color:white">0000</td>');
+                $('.figure-tr' + i).append('<td style="color:white; width: 23pt; height: 23pt;">0000</td>');
             } else {
-                $('.figure-tr' + i).append('<td style="background-color:' + tetr.color + '; color:' + tetr.color +'">1111</td>');
+                $('.figure-tr' + i).append('<td style="width: 23pt; height: 23pt;background-color:' + tetr.color + '; color:' + tetr.color +'">1111</td>');
             }
         }
     }

@@ -2,44 +2,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-  <title>Тетрис</title>
-  <link th:href="@{/css/game.css}" rel="stylesheet" />
+    <title>Тетрис</title>
+    <link th:href="@{/css/game.css}" rel="stylesheet"/>
 </head>
 <body>
-  <input hidden id="levelId" th:value="${level.getId()}">
-  <input hidden id="height" th:value="${level.getGlass().getHeight()}">
-  <input hidden id="width" th:value="${level.getGlass().getWidth()}">
-  <input hidden id="speed" th:value="${level.getSpeed()}">
-  <input hidden id="grid" th:value="${settings.getGrid()}">
-  <input hidden id="next" th:value="${settings.getNext()}">
-  <input hidden id="stat" th:value="${settings.getStat()}">
-  <div style="display: flex">
-    <div style="flex-direction: column">
-      <p id="time">время</p>
-      <p id="result">результат</p>
+<input hidden id="levelId" th:value="${level.getId()}">
+<input hidden id="height" th:value="${level.getGlass().getHeight()}">
+<input hidden id="width" th:value="${level.getGlass().getWidth()}">
+<input hidden id="speed" th:value="${level.getSpeed()}">
+<input hidden id="grid" th:value="${settings.getGrid()}">
+<input hidden id="next" th:value="${settings.getNext()}">
+<input hidden id="stat" th:value="${settings.getStat()}">
+<div id="wrapper" style="display: flex">
+    <div id="res-wrapper" style="flex-direction: column; width: 100pt; margin: 2pt;">
+        <p id="l-time">Время:</p>
+        <p id="time">Время</p>
+        <p id="l-result">Очки:</p>
+        <p id="result">Очки</p>
     </div>
     <canvas id="game"></canvas>
-    <canvas id="gridBG" style="position: fixed"></canvas>
+    <canvas id="gridBG" style="position: fixed; margin-left: 104pt;"></canvas>
     <table id="nextFig"></table>
-  </div>
-  <div class="modal">
+</div>
+<div class="modal">
     <p>Игра окончена!</p>
-    <p>Сохранить результаты?</p>
-    <label id="resLabel"><b>Очки</b></label>
+    <p>Сохранить результат?</p>
+    <label id="resLabel"><b>Очки:</b></label>
     <p class="results"></p>
-    <label id="timeLabel"><b>Время</b></label>
+    <label id="timeLabel"><b>Время:</b></label>
     <p class="time"></p>
-      <input id="user" hidden th:value="${username}">
-      <div style="display:flex">
-        <a th:href="@{/statistic}">
-          <div class="saveButton">Да</div>
+    <input id="user" hidden th:value="${username}">
+    <div style="display:flex">
+        <a th:href="@{/statistic}" style="text-decoration: none">
+            <div class="saveButton" id="yes">Да</div>
         </a>
-        <a th:href="@{/main}">Нет</a>
-      </div>
-  </div>
-  <div class="overlay" id="overlay-modal"></div>
-  <script type="text/javascript"
-          src="https://code.jquery.com/jquery-1.11.1.js"></script>
-  <script type="text/javascript" th:src="@{/js/game.js}"></script>
+        <a th:href="@{/main}" style="text-decoration: none">
+            <div class="saveButton" id="no">Нет</div>
+        </a>
+    </div>
+</div>
+<div class="overlay" id="overlay-modal"></div>
+<script type="text/javascript"
+        src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" th:src="@{/js/game.js}"></script>
 </body>
 </html>
