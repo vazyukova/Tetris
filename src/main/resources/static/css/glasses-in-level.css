@@ -37,6 +37,7 @@ html, body {
     transform: translate(-50%, 0);
     border: 15px solid #c9ffff;
     border-collapse: collapse;
+    font-size: 16pt;
 }
 .table th {
     font-weight: bold;

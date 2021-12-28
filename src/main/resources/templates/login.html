@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Тетрис. Авторизация.</title>
+    <title>Тетрис. Авторизация</title>
     <!--<link rel="stylesheet" href="../static/css/login_style.css"/>-->
     <link media="all" th:href="@{/css/login_style.css}" rel="stylesheet" type="text/css"/>
 </head>
@@ -16,7 +16,7 @@
         <p>Вы вышли из профиля.<p>
     </div>
         <form th:action="@{/}" method="post" th:class="form-container">
-            <p>«Тетрис»</p>
+            <p style="font-size: 20pt;">«Тетрис»</p>
             <label for="username"> Логин: </label>
             <input type="text" name="username" id="username" placeholder="Логин"/>
 

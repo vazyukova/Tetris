@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Информация о системе</title>
+    <title>Тетрис. Информация о системе</title>
+    <link media="all" th:href="@{/css/info.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<a th:href="@{/main}">
+    <div class="menu-item"></div>
+</a>
+<div class ="wrapper">
     <h1>Игра "Тетрис"</h1>
     <h2>Информация о системе</h2>
     <p>Приложение представляет собой расширенную версию классической игры "Тетрис". </p>
@@ -30,5 +35,6 @@
         <li>Ускоряйте фигуру с помощью стрелки "вниз"</li>
         <li>Крутите фигуру с помощью стрелки "вверх"</li>
     </ul>
+</div>
 </body>
 </html>

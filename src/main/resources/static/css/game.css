@@ -1,8 +1,21 @@
 /*настройки стилей страницы*/
+@font-face {
+    font-family: 'Roboto';
+    src: url(http://fonts.gstatic.com/s/roboto/v15/mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2);
+}
 
 html, body {
+    background-image: url("https://cdn-ru0.puzzlegarage.com/img/puzzle/12/178_preview_r.v2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #52d7be;
     height: 100%;
     margin: 0;
+    font-size: 16pt;
+    font-family: Roboto;
+
 }
 /*делаем чёрный фон и выравниваем всё по центру*/
 body {
@@ -15,25 +28,23 @@ canvas {
     border: 1px solid black;
 }
 
-
-
 td{
     border: 1px black solid;
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
     margin: 0;
     font-size: 14px;
 }
 
-
 #nextFig{
-    margin-left: 80px;
+    margin-left: 10px;
     height: 90px;
 }
 
 .withgrid {
     background-image:url("/static/img/grid.png");
 }
+
 .overlay {
     opacity: 0;
     visibility: hidden;
@@ -63,6 +74,7 @@ td{
     border-radius: 3px;
     background-color: #fff;
     transition: 0.3s all;
+    border: 2pt solid salmon;
 }
 
 .active{
@@ -73,4 +85,45 @@ td{
 .saveButton{
     margin-right: 20px;
     margin-left: 210px;
+}
+
+#wrapper{
+    background-color: white;
+    padding: 20pt;
+    border: 3pt solid deepskyblue;
+}
+
+#res-wrapper{
+    border: #b37eff;
+}
+
+#yes{
+    text-decoration: none;
+    margin-left: 175px;
+    color: black;
+    padding: 5pt;
+    cursor: pointer;
+    width: 50px;
+    background: #93e57f;
+    text-align:center;
+    font-size: 16pt;
+}
+#yes:active{
+    background: #c0f8bc;
+}
+
+#no{
+    text-decoration: none;
+    margin-left: 7pt;
+    color: black;
+    padding: 5pt;
+    cursor: pointer;
+    width: 50px;
+    background: #ff5bd7;
+    text-align:center;
+    font-size: 16pt;
+}
+
+#no:active{
+    background: #ffbcee;
 }

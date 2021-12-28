@@ -26,6 +26,7 @@ html, body {
     border: 15px solid #c9ffff;
     border-top: 5px solid #c5c5ff;
     border-collapse: collapse;
+    font-size: 16pt;
 }
 .table th {
     font-weight: bold;
@@ -61,9 +62,11 @@ html, body {
     width: 200px;
     text-align:center;
     font-weight: bold;
+    font-size: 16pt;
 }
 #my-stat{
     margin-top: 5pt;
+    width: 230px;
     margin-left: 100px;
     background: #faff63;
 }
