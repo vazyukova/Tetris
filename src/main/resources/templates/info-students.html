@@ -3,15 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Тетрис. Информация о разработчиках</title>
-    <link media="all" th:href="@{/css/info.css}" rel="stylesheet" type="text/css"/>
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            src: url(http://fonts.gstatic.com/s/roboto/v15/mErvLBYg_cXG3rLvUsKT_fesZW2xOQ-xsNqO47m55DA.woff2);
+        }
+
+        html, body {
+            background-image: url("https://cdn-ru0.puzzlegarage.com/img/puzzle/12/178_preview_r.v2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-color: #52d7be;
+            height: 100%;
+            margin: 0;
+            font-size: 15px;
+            font-family: Roboto;
+        }
+        .home{
+            position: fixed;
+            margin-top: 5pt;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background-image: url("https://img.icons8.com/ios/50/000000/home-page.png");
+            background-repeat: no-repeat;
+            background-color: #77dcff;
+        }
+
+        .wrapper{
+            width: 90%;
+            top: 10%;
+            height: auto;
+            border: 2px solid lightgrey;
+            padding: 15pt;
+            background-color: white;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, 0);
+            font-size: 16pt;
+        }
+    </style>
 </head>
 <body>
-<a th:href="@{/main}">
-    <div class="menu-item"></div>
+<a th:href="@{/main}" >
+    <div class="home"></div>
 </a>
 <div class ="wrapper">
-    <h1>Игра "Тетрис"</h1>
-    <h2>Информация о разработчиках</h2>
+    <h1 style="text-align: center">Самарский университет</h1>
+    <h2 style="text-align: center">Кафедра программных систем</h2>
+    <br>
+    <h3 style="text-align: center">Курсовой проект по дисциплине  «Программная инженерия»</h3>
+    <br>
+    <p style="text-align: center">Тема проекта: «Автоматизированная система «Игра «Тетрис» » с функциями администратора»</p>
+    <br>
+    <p style="text-align: center">Разработчики: обучающиеся группы 6413-020302D</p>
+    <p style="text-align: center">Вазюкова Галина Сергеевна</p>
+    <p style="text-align: center">Андреева Анна Алексеевна</p>
 </div>
 </body>
 </html>
